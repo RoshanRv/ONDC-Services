@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Title.jsx", "components/Search.jsx", "components/RatingCard.jsx", "components/NewArrivals.jsx", "components/HomeHero.jsx", "components/Header.jsx", "components/Button.jsx", "pages/_app.jsx", "pages/_document.jsx", "pages/index2.jsx"],
   "exclude": ["node_modules"]
 }

@@ -7,6 +7,8 @@ import NewArrivals from '../components/NewArrivals'
 import Search from '../components/Search'
 
 const Home: NextPage = () => {
+
+
   return (
     <div className="font-rale">
       <HomeHero/>
