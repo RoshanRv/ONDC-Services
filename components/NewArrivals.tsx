@@ -30,8 +30,8 @@ const newArrivalData = [
         img:'banner5'
     },
     {
-        title:'Sony XR ',
-        price:'440000',
+        title:'Tommy Wallet',
+        price:'8000',
         img:'banner6'
     },
     {
@@ -71,7 +71,7 @@ const NewArrivals = () => {
                         <h1 className='text-3xl my-2 font-semibold' >{data.title}</h1>
                         <h1 className='text-xl my-1' >₹ {data.price}</h1>
                     </div>
-                    <Button  >Buy Now</Button>
+                    <Button link={`/products/${i}`}  >Buy Now</Button>
                 </motion.div>
             ))}
         </div>

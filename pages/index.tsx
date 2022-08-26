@@ -9,7 +9,6 @@ import Search from '../components/Search'
 const Home: NextPage = () => {
   return (
     <div className="font-rale">
-      <Header/>
       <HomeHero/>
       <Search />
       <NewArrivals/>

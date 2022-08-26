@@ -7,7 +7,11 @@ const Search = () => {
     const [searchTerm,setSearchTerm] = useState('')
 
     const handleSearch = ()=>{
+        try{
 
+        }catch(err){
+            
+        }
     }
 
   return (
@@ -17,7 +21,7 @@ const Search = () => {
         <div className='flex gap-x-4 w-full bg-black md:p-4 rounded-lg'>
             <input type="search"
             placeholder='Search Any Products...'
-            className='w-full p-2 rounded-md border border-black outline-0 '
+            className='w-full p-2 rounded-md border border-black outline-0'
             value={searchTerm} 
             onChange={(e)=>setSearchTerm(e.target.value)}
              />
