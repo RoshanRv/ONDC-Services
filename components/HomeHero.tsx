@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {FaAngleLeft,FaAngleRight} from 'react-icons/fa'
 import {motion} from 'framer-motion'
+import Button from './Button'
 
 
 const bannerData = [
@@ -53,7 +54,9 @@ const HomeHero = () => {
                         >
                             <h1 className=" text-2xl md:text-5xl">{data.title}</h1>
                             <h1 className=" text-xl md:text-2xl">{data.desc}</h1>
+                            <Button>Buy Now</Button>
                         </motion.div>
+
 
                     </div>
                 ))}  
