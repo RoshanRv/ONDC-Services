@@ -4,7 +4,7 @@ import {motion} from 'framer-motion'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
-const register = () => {
+const login = () => {
 
     const [password,setPassword] = useState('')
     const [email,setEmail] =useState('')
@@ -95,4 +95,4 @@ const register = () => {
   )
 }
 
-export default register
+export default login

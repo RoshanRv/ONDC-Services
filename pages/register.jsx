@@ -1,8 +1,8 @@
 import React ,{useState} from 'react'
 import Title from '../components/Title'
 import {motion} from 'framer-motion'
-import Button from '../components/Button'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 const register = () => {
 
@@ -20,6 +20,7 @@ const register = () => {
     const [isClient,setIsClient] = useState(true)
     const [passIncorrect,setPassIncorrect] = useState(false)
 
+    const navigate = useRouter()
     
 
     const handleSubmit =async(e)=>{
@@ -49,6 +50,11 @@ const register = () => {
                                 }else if(role == 'plumber'){
                                     const details = await axios.post('http://localhost:3000/api/plumberDetails',{name:username,email,password,phone,address,age,img:url})
                                 }
+
+                                setTimeout(()=>{
+                                    navigate.push('/')
+                                },3000)
+
     
                             }catch(err){
                                 console.log(err)
@@ -64,6 +70,11 @@ const register = () => {
                                 }else if(role == 'plumber'){
                                     const details = await axios.post('http://localhost:3000/api/plumberDetails',{name:username,email,password,phone,address,age})
                                 }
+
+                                setTimeout(()=>{
+                                    navigate.push('/')
+                                },3000)
+
     
                             }catch(err){
                                 console.log(err)
