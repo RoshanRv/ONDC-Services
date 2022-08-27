@@ -158,6 +158,7 @@ export default Worker
 
 export const getServerSideProps = async({params})=>{
     let {service,id} = params
+    console.log(service)
 
     if(service == 'Vehicle' || service=='vehicle')service = 'driver'
     try{

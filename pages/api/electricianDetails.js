@@ -16,6 +16,15 @@ const handler = async (req,res)=>{
         }
     }
 
+    if(method=='GET' && query.id){
+        try{
+            const details = await ElectricianDetails.findById(query.id)
+            res.status(200).json(details)
+        }catch(err){
+            res.status(500).json(err)
+        }
+    }
+
     else if(method=='GET'){
         try{
             const details = await ElectricianDetails.find()
