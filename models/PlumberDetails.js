@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const DriverDetails = new mongoose.Schema(
+const PlumberDetails = new mongoose.Schema(
     {
         name:{
             type:String,
@@ -10,20 +10,6 @@ const DriverDetails = new mongoose.Schema(
         phone:{
             type:Number,
             required:true,
-        },
-        vehicleType:{
-            type:String,
-        },
-        vehicleNo:{
-            type:Number,
-        },
-
-        vehicleBrand:{
-            type:String,
-        },
-
-        licenseNo:{
-            type:String,
         },
 
         online:{
@@ -49,10 +35,10 @@ const DriverDetails = new mongoose.Schema(
         },
         img:{
             type:String,
-            default:'/img/driver.png'
+            default:'/img/plumber.png'
         }
 
     }
 )
 
-module.exports = mongoose.models.DriverDetails || mongoose.model('DriverDetails',DriverDetails)
+module.exports = mongoose.models.PlumberDetails || mongoose.model('PlumberDetails',PlumberDetails)

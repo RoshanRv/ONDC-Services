@@ -17,6 +17,7 @@ const handler = async(req,res)=>{
     }
 
     if(method=='POST'){
+        console.log(req.body)
         try{
             const users = await UserDetails.create(req.body)
             res.status(200).json(users)

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserSchema = new mongoose.Schema(
+const BookingDetails = new mongoose.Schema(
     {
         name:{
             type:String,
@@ -17,15 +17,11 @@ const UserSchema = new mongoose.Schema(
             type:String,
             required:true
         },
-        email:{
-            type:String,
-            required:true
-        },
-        password:{
+        workerId:{
             type:String,
             required:true
         }
     }
 )
 
-module.exports = mongoose.models.UserDetails || mongoose.model('UserDetails',UserSchema)
+module.exports = mongoose.models.BookingDetails || mongoose.model('BookingDetails',BookingDetails)

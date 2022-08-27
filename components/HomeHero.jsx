@@ -6,19 +6,22 @@ import Button from './Button'
 
 const bannerData = [
     {
-        title:'Rolex Watch',
-        desc:'Best Watch of 2022',
-        img:'banner1'
+        title:'Taxi Services',
+        desc:'Cabs At Your Door-Step At Lowest Cost!!!',
+        img:'taxi-banner',
+        link:'/services/vehicle'
     },
     {
-        title:'HP Laptop',
-        desc:'Best Affordable Laptop of 2022',
-        img:'banner2'
+        title:'Electrician Services',
+        desc:'Electricians At Your Door-Step At Lowest Cost!!!',
+        img:'elect-banner',
+        link:'/services/electrician'
     },
     {
-        title:'Sony XR ',
-        desc:'Latest Tech of 2022',
-        img:'banner3'
+        title:'Plumber Services',
+        desc:'Plumbers At Your Door-Step At Lowest Cost!!!',
+        img:'plumber-banner',
+        link:'/services/plumber'
     },
 ]
 
@@ -41,9 +44,14 @@ const HomeHero = () => {
         <section className='w-full flex overflow-hidden '>
             <div className='flex w-max  transition-all duration-700' style={{transform:`translateX(${-slideIndex*100}vw)`}} >
             {bannerData.map((data,i)=>(
-                    <div key={i} className='w-screen h-[30rem] text-white bg-black flex justify-center items-center' >
+                    <div key={i} className='w-screen h-[30rem] gap-x-6 text-whie bg-sky-200 flex justify-center items-center' >
                         <div>
-                            <img  src={`/img/${data.img}.png`}  className='w-full h-full lg:object-fill object-center object-cover' />
+                            <motion.img 
+                            initial={{opacity:0}}
+                            whileInView={{opacity:1}}
+                            key={i}
+                            src={`/img/${data.img}.png`}  
+                            className='w-full h-full lg:object-fill object-center object-cover' />
                         </div>
 
                         <motion.div 
@@ -54,7 +62,7 @@ const HomeHero = () => {
                         >
                             <h1 className=" text-2xl md:text-5xl">{data.title}</h1>
                             <h1 className=" text-xl md:text-2xl">{data.desc}</h1>
-                            <Button>Buy Now</Button>
+                            <Button link={data.link} >Buy Now</Button>
                         </motion.div>
 
 
@@ -63,9 +71,9 @@ const HomeHero = () => {
             </div>
         </section>
         {/* left */}
-        <button className='z-50 absolute top-1/2  -translate-y-1/2 md:left-10 left-4' onClick={()=>handlePrevious()} ><FaAngleLeft className='w-12 text-white h-12 rounded-full bg-white/20 p-2 z-50 px-2' /></button>
+        <button className='z-50 absolute top-1/2  -translate-y-1/2 md:left-10 left-4' onClick={()=>handlePrevious()} ><FaAngleLeft className='w-12 text-white h-12 rounded-full bg-black/20 p-2 z-50 px-2' /></button>
         {/* right */}
-        <button className='z-50 absolute top-1/2 -translate-y-1/2 md:right-10 right-4' onClick={()=>handleNext()} ><FaAngleRight className='w-12 text-white h-12 rounded-full bg-white/20 p-2 z-50 px-2' /></button>
+        <button className='z-50 absolute top-1/2 -translate-y-1/2 md:right-10 right-4' onClick={()=>handleNext()} ><FaAngleRight className='w-12 text-white h-12 rounded-full bg-black/20 p-2 z-50 px-2' /></button>
     </section>
    
   )

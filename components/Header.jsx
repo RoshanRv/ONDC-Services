@@ -6,8 +6,13 @@ const Header = () => {
   return (
     <header className='p-1 md:p-3 lg:px-6 lg:py-3 font-rale bg-gradient-to-r from-sky-400 to-blue-600'>
         <nav className='flex justify-between items-center text-white'>
-            <h1 className='text-4xl font-bold  ' >LOGO</h1>
-            <Link href={'/login'} ><FaUser  className='text-2xl' /></Link>
+            <Link href={'/'} ><h1 className='text-4xl font-bold cursor-pointer'>ONDC</h1></Link>
+            <Link href={'/register'} >
+              <div className='flex gap-x-4 cursor-pointer'>
+                <FaUser className='text-2xl'/>
+                <h1> Register</h1>
+              </div>
+              </Link>
         </nav>
     </header>
   )
