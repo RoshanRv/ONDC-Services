@@ -24,7 +24,7 @@ const login = () => {
             e.preventDefault()
 
            try{
-              const data = await axios.post('http://localhost:3000/api/login',{email,password,role})
+              const data = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/login',{email,password,role})
               console.log(data)
               if(data.data.length > 0){
                 setPassIncorrect(false)

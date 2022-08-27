@@ -20,7 +20,7 @@ const Worker = ({data}) => {
         if(username != "" || phone !="" || address !="" ){
             e.preventDefault()
             try{
-                const book = await axios.post('http://localhost:3000/api/bookingDetails',{name:username,phone,age,address,workerId:data._id})
+                const book = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/bookingDetails',{name:username,phone,age,address,workerId:data._id})
             }catch(err){
                 console.log(err)
             }
@@ -162,7 +162,7 @@ export const getServerSideProps = async({params})=>{
     if(service == 'Vehicle' || service=='vehicle')service = 'driver'
     try{
         
-        const detail = await axios.get(`http://localhost:3000/api/${service}Details?id=${id}`)
+        const detail = await axios.get(`https://novicers-i-tech-ondc.vercel.app/api/${service}Details?id=${id}`)
         console.log(detail.data.name)
         return {
             props:{

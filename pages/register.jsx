@@ -32,7 +32,7 @@ const register = () => {
                 setPassIncorrect(false)
                 try{
                     if(isClient){
-                        const details = await axios.post('http://localhost:3000/api/user',{name:username,email,password,phone,address,age})
+                        const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/user',{name:username,email,password,phone,address,age})
                     }else{
                         if(file){
                             const data = new FormData()
@@ -44,11 +44,11 @@ const register = () => {
                                 const {url} = uploadRes.data
     
                                 if(role == 'driver'){
-                                    const details = await axios.post('http://localhost:3000/api/driverDetails',{name:username,email,password,phone,address,age,img:url})
+                                    const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/driverDetails',{name:username,email,password,phone,address,age,img:url})
                                 }else if(role == 'electrician'){
-                                    const details = await axios.post('http://localhost:3000/api/electricianDetails',{name:username,email,password,phone,address,age,img:url})
+                                    const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/electricianDetails',{name:username,email,password,phone,address,age,img:url})
                                 }else if(role == 'plumber'){
-                                    const details = await axios.post('http://localhost:3000/api/plumberDetails',{name:username,email,password,phone,address,age,img:url})
+                                    const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/plumberDetails',{name:username,email,password,phone,address,age,img:url})
                                 }
 
                                 setTimeout(()=>{
@@ -64,11 +64,11 @@ const register = () => {
                             try{
     
                                 if(role == 'driver'){
-                                    const details = await axios.post('http://localhost:3000/api/driverDetails',{name:username,email,password,phone,address,age})
+                                    const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/driverDetails',{name:username,email,password,phone,address,age})
                                 }else if(role == 'electrician'){
-                                    const details = await axios.post('http://localhost:3000/api/electricianDetails',{name:username,email,password,phone,address,age})
+                                    const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/electricianDetails',{name:username,email,password,phone,address,age})
                                 }else if(role == 'plumber'){
-                                    const details = await axios.post('http://localhost:3000/api/plumberDetails',{name:username,email,password,phone,address,age})
+                                    const details = await axios.post('https://novicers-i-tech-ondc.vercel.app/api/plumberDetails',{name:username,email,password,phone,address,age})
                                 }
 
                                 setTimeout(()=>{

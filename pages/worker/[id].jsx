@@ -12,7 +12,7 @@ const WorkerReport = ({data}) => {
     // const [data,setData] =useState('')
 
     // useEffect(()=>{
-    //         axios.get(`http://localhost:3000/api/bookingDetails?id=${id}`).then(resp=>console.log(resp.data)).catch(err=>console.log(err))
+    //         axios.get(`https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`).then(resp=>console.log(resp.data)).catch(err=>console.log(err))
 
     // },[])
 
@@ -49,7 +49,7 @@ export const getServerSideProps = async({query})=>{
     const {id} = query
     console.log(query)
     try{
-        const data = await axios.get(`http://localhost:3000/api/bookingDetails?id=${id}`)
+        const data = await axios.get(`https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`)
 
         return {
             props:{
