@@ -5,16 +5,7 @@ import Title from '../../components/Title'
 import { FaUser,FaLocationArrow , FaPhone,FaEnvelope } from 'react-icons/fa'
 
 const WorkerReport = ({data}) => {
-    const {id} = useRouter().query
-
-    console.log(data)
-
-    // const [data,setData] =useState('')
-
-    // useEffect(()=>{
-    //         axios.get(`https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`).then(resp=>console.log(resp.data)).catch(err=>console.log(err))
-
-    // },[])
+    
 
   return (
     <main className='px-6 lg:px-10'>
