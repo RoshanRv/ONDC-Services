@@ -11,7 +11,7 @@ const WorkerReport = ({data}) => {
     <main className='px-6 lg:px-10'>
         <Title>Services Requested</Title>
         <div className="grid lg:grid-cols-3 gap-8 grid-cols-1">
-            {data.map((d,i)=>(
+            {data.map((d)=>(
                 <div className='bg-sky-300 md:p-4 p-2  border-2 rounded-lg text-center'>
                     <h1 className="text-black text-3xl font-semibold capitalize">{d.name}</h1>
                     <div className="flex gap-x-4 mx-auto items-center text-lg my-2 border border-black w-max px-6 py-2 rounded-lg bg-gray-100 ">
