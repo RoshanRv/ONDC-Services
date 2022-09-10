@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "framer-motion": "^7.2.1",
     "mongoose": "^6.5.3",
     "next": "latest",
