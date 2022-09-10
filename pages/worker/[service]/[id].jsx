@@ -23,9 +23,8 @@ const WorkerReport = ({ data }) => {
         setIsLoading(true)
         setIsError(false)
         try {
-            // axios.put(`https://novicers-i-tech-ondc.vercel.app/api/login`)
             const resp = await axios.put(
-                `http://localhost:3000/api/${service}Details`,
+                `https://novicers-i-tech-ondc.vercel.app/api/${service}Details`,
                 { id, online: !status }
             )
             console.log(resp)
