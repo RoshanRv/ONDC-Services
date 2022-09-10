@@ -32,6 +32,7 @@ const login = () => {
                     { email, password, role }
                 )
                 if (data.data.length > 0) {
+                    console.log(data)
                     localStorage.setItem("user", JSON.stringify(data.data.name))
                     setPassIncorrect(false)
                     setIsLoading(false)
