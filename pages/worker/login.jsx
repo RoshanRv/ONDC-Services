@@ -32,7 +32,7 @@ const login = () => {
                     { email, password, role }
                 )
                 if (data.data.length > 0) {
-                    localStorage.setItem("user", JSON.parse(data.data.name))
+                    localStorage.setItem("user", JSON.stringify(data.data.name))
                     setPassIncorrect(false)
                     setIsLoading(false)
                     navigate.push(`/worker/${role}/${data.data[0]._id}`)

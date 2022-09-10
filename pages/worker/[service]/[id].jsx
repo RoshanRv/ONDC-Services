@@ -15,7 +15,7 @@ const WorkerReport = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        const user = JSON.stringify(localStorage.getItem("user"))
+        const user = JSON.parse(localStorage.getItem("user"))
         if (user) setUser(user)
     }, [])
 
@@ -86,7 +86,6 @@ export default WorkerReport
 
 export const getServerSideProps = async ({ query }) => {
     const { id } = query
-    console.log(query)
     try {
         const data = await axios.get(
             `https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`
