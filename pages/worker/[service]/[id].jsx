@@ -15,7 +15,7 @@ const WorkerReport = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"))
+        const user = localStorage.getItem("user")
         if (user) setUser(user)
     }, [])
 
