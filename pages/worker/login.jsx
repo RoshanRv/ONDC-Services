@@ -31,11 +31,11 @@ const login = () => {
                     "https://novicers-i-tech-ondc.vercel.app/api/login",
                     { email, password, role }
                 )
-                console.log(data)
                 if (data.data.length > 0) {
+                    localStorage.setItem("user", JSON.parse(data.data.name))
                     setPassIncorrect(false)
                     setIsLoading(false)
-                    navigate.push(`/worker/${data.data[0]._id}`)
+                    navigate.push(`/worker/${role}/${data.data[0]._id}`)
                 } else {
                     setIsLoading(false)
                     setPassIncorrect(true)
