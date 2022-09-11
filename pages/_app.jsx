@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { useRouter } from "next/router"
 import Spinner from "../components/Spinner"
 
-const Loading = () => {
+function MyApp({ Component, pageProps }) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
 
@@ -29,24 +29,15 @@ const Loading = () => {
 
     return (
         <>
-            {loading && (
-                <div className="w-full h-screen bg-sky-300 flex justify-center items-center">
-                    <Spinner />
-                </div>
-            )}
-        </>
-    )
-}
-
-function MyApp({ Component, pageProps }) {
-    // const [_,setData]= useContext(Context)
-
-    return (
-        <>
             <Store>
                 <Header />
-                <Loading />
-                <Component {...pageProps} />
+                {loading ? (
+                    <div className="w-full h-screen bg-sky-300 flex justify-center items-center">
+                        <Spinner />
+                    </div>
+                ) : (
+                    <Component {...pageProps} />
+                )}
             </Store>
         </>
     )
