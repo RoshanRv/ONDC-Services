@@ -283,7 +283,7 @@ const register = () => {
                         {isLoading && <Spinner />}
                         {isError && <ErrorTxt />}
 
-                        <Link href="/worker/login">
+                        <Link href="/worker/login" passHref>
                             <h1 className="text-gray-100 hover:underline hover:text-white w-max mx-auto  text-lg">
                                 Login
                             </h1>
