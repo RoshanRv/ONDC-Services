@@ -54,7 +54,7 @@ const login = () => {
 
     return (
         <main className="md:px-6 px-3">
-            <Title>Login</Title>
+            <Title>Login As Worker</Title>
             {/*     FORM        */}
             <div>
                 <form

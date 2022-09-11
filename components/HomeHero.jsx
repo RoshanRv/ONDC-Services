@@ -47,7 +47,7 @@ const HomeHero = () => {
                     {bannerData.map((data, i) => (
                         <div
                             key={i}
-                            className="w-screen h-[30rem] gap-x-6 text-whie bg-sky-200 flex justify-center items-center"
+                            className="w-screen min-h-[30rem] gap-x-6 text-whie bg-sky-200 md:flex justify-center items-center"
                         >
                             <div>
                                 <motion.img
@@ -60,7 +60,7 @@ const HomeHero = () => {
                             </div>
 
                             <motion.div
-                                className="flex flex-col gap-y-8"
+                                className="flex flex-col gap-y-8 p-4"
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 key={i}

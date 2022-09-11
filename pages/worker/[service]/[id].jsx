@@ -41,16 +41,19 @@ const WorkerReport = ({ data }) => {
         <main className="px-6 lg:px-10">
             <Title>Services Requested</Title>
             <Title>{user == null ? "Worker" : user}</Title>
-            <div className="flex text-xl items-center gap-x-2 my-1 md:w-max mx-auto rounded-md border-2 p-2 border-gray-400">
-                <div
-                    className={`h-2 w-2 rounded-full ${
-                        status ? "bg-green-500" : "bg-red-500"
-                    }`}
-                />
-                <h1>{status ? "Active" : "Busy"}</h1>
+            <div className="md:flex justify-center text-xl items-center gap-x-10 my-1 md:w-max mx-auto rounded-md border-2 p-2 border-gray-400">
+                <div className="flex items-center gap-x-2 w-max mx-auto">
+                    <div
+                        className={`h-2 w-2 rounded-full ${
+                            status ? "bg-green-500" : "bg-red-500"
+                        }`}
+                    />
+                    <h1>{status ? "Active" : "Busy"}</h1>
+                </div>
+
                 <button
                     onClick={handleStatus}
-                    className="px-6 py-2  font-rale bg-gradient-to-r from-sky-400 to-blue-600 text-white rounded-lg block mx-10 my-4"
+                    className="px-6 py-2  w-max  font-rale bg-gradient-to-r from-sky-400 to-blue-600 text-white rounded-lg block mx-auto my-4"
                 >
                     Switch Status
                 </button>

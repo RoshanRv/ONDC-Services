@@ -42,7 +42,7 @@ const Worker = ({ data }) => {
     return (
         <main className="p-3 md:p-6">
             <section className="lg:flex gap-x-6 ">
-                <div className="lg:w-[30%] h-[25rem]">
+                <div className="lg:w-[30%] lg:h-[25rem] h-80 w-72 mx-auto">
                     <img
                         src={`${data?.img}`}
                         alt="Product Image"
@@ -116,7 +116,7 @@ const Worker = ({ data }) => {
                 </div>
             </section>
             <Title>Ratings & Reviews</Title>
-            <div className="w-96 h-40 bg-gradient-to-t from-black to-black/60 mx-auto text-xl flex items-center font-semibold text-white">
+            <div className="md:w-96 w-60 h-40 bg-gradient-to-t from-black to-black/60 mx-auto text-xl flex items-center font-semibold text-white">
                 <h1 className="w-max mx-auto">Under Construction...</h1>
             </div>
 

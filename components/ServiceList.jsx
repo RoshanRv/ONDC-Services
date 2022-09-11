@@ -4,12 +4,12 @@ import Link from "next/link"
 
 const ServiceList = () => {
     return (
-        <div className="md:px-6">
+        <div className="md:px-6 px-2">
             <motion.section className="grid lg:grid-cols-3 gap-8 grid-cols-1">
                 {/*         CAB      */}
                 <Link href={"/services/vehicle"}>
                     <div className=" rounded-lg cursor-pointer">
-                        <div className="relative group overflow-hidden">
+                        <div className="relative w-full group overflow-hidden">
                             <img
                                 className="rounded-lg group-hover:scale-125  transition-all "
                                 src="/img/cab.jpeg"
