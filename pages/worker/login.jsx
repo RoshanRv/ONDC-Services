@@ -12,7 +12,6 @@ const login = () => {
     const [passIncorrect, setPassIncorrect] = useState(false)
     const navigate = useRouter()
 
-    const [file, setFile] = useState("")
     const [role, setRole] = useState("")
 
     const [isLoading, setIsLoading] = useState(false)
@@ -33,10 +32,7 @@ const login = () => {
                 )
                 if (data.data.length > 0) {
                     console.log(data)
-                    localStorage.setItem(
-                        "user",
-                        JSON.stringify(data.data[0].name)
-                    )
+                    localStorage.setItem("user", JSON.stringify(data.data[0]))
                     setPassIncorrect(false)
                     setIsLoading(false)
                     navigate.push(`/worker/${role}/${data.data[0]._id}`)

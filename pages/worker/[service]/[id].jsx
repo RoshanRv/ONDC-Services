@@ -9,14 +9,17 @@ import ErrorTxt from "../../../components/ErrorText"
 const WorkerReport = ({ data }) => {
     const [user, setUser] = useState("")
     const { service, id } = useRouter().query
-    const [status, setStatus] = useState(data.online)
+    const [status, setStatus] = useState(false)
 
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"))
-        if (user) setUser(user)
+        if (user) {
+            setUser(user.name)
+            setStatus(user.online)
+        }
     }, [])
 
     const handleStatus = async () => {
