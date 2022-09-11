@@ -1,5 +1,6 @@
 import "../styles/globals.css"
 import Header from "../components/Header"
+import Footer from "../components/Footer"
 import Store from "../components/Context"
 import { useEffect, useState } from "react"
 import { Context } from "../components/Context"
@@ -30,13 +31,16 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <Store>
-                <Header />
                 {loading ? (
                     <div className="w-full h-screen bg-sky-300 flex justify-center items-center">
                         <Spinner />
                     </div>
                 ) : (
-                    <Component {...pageProps} />
+                    <>
+                        <Header />
+                        <Component {...pageProps} />
+                        <Footer />
+                    </>
                 )}
             </Store>
         </>
