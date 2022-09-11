@@ -41,7 +41,7 @@ const WorkerReport = ({ data }) => {
     }
 
     return (
-        <main className="px-6 lg:px-10">
+        <main className="px-6 lg:px-10 mb-10">
             <Title>Services Requested</Title>
             <Title>{user == null ? "Worker" : user}</Title>
             <div className="md:flex justify-center text-xl items-center gap-x-10 my-1 md:w-max mx-auto rounded-md border-2 p-2 border-gray-400">

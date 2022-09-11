@@ -8,7 +8,7 @@ const Service = ({ details }) => {
     const { service } = useRouter().query
 
     return (
-        <main className="text-center">
+        <main className="text-center mb-10">
             <Title>{`${service} Services`}</Title>
             <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 grid-cols-1 w-max mx-auto">
                 {details.map((data, i) => (
