@@ -25,7 +25,7 @@ const Worker = ({ data }) => {
             setIsLoading(true)
             try {
                 const book = await axios.post(
-                    "https://novicers-i-tech-ondc.vercel.app/api/bookingDetails",
+                    "http://localhost:3000/api/bookingDetails",
                     { name: username, phone, age, address, workerId: data._id }
                 )
                 setIsError(false)
@@ -222,7 +222,7 @@ export const getServerSideProps = async ({ params }) => {
     if (service == "Vehicle" || service == "vehicle") service = "driver"
     try {
         const detail = await axios.get(
-            `https://novicers-i-tech-ondc.vercel.app/api/${service}Details?id=${id}`
+            `http://localhost:3000/api/${service}Details?id=${id}`
         )
         console.log(detail.data.name)
         return {

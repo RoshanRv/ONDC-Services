@@ -54,46 +54,18 @@ const register = () => {
                             )
                             const { url } = uploadRes.data
 
-                            if (role == "driver") {
-                                const details = await axios.post(
-                                    "https://novicers-i-tech-ondc.vercel.app/api/driverDetails",
-                                    {
-                                        name: username,
-                                        email,
-                                        password,
-                                        phone,
-                                        address,
-                                        age,
-                                        img: url,
-                                    }
-                                )
-                            } else if (role == "electrician") {
-                                const details = await axios.post(
-                                    "https://novicers-i-tech-ondc.vercel.app/api/electricianDetails",
-                                    {
-                                        name: username,
-                                        email,
-                                        password,
-                                        phone,
-                                        address,
-                                        age,
-                                        img: url,
-                                    }
-                                )
-                            } else if (role == "plumber") {
-                                const details = await axios.post(
-                                    "https://novicers-i-tech-ondc.vercel.app/api/plumberDetails",
-                                    {
-                                        name: username,
-                                        email,
-                                        password,
-                                        phone,
-                                        address,
-                                        age,
-                                        img: url,
-                                    }
-                                )
-                            }
+                            const details = await axios.post(
+                                `http://localhost:3000/api/d${role}Details`,
+                                {
+                                    name: username,
+                                    email,
+                                    password,
+                                    phone,
+                                    address,
+                                    age,
+                                    img: url,
+                                }
+                            )
                             setIsLoading(false)
                             setTimeout(() => {
                                 navigate.push("/")
@@ -105,43 +77,17 @@ const register = () => {
                         }
                     } else {
                         try {
-                            if (role == "driver") {
-                                const details = await axios.post(
-                                    "https://novicers-i-tech-ondc.vercel.app/api/driverDetails",
-                                    {
-                                        name: username,
-                                        email,
-                                        password,
-                                        phone,
-                                        address,
-                                        age,
-                                    }
-                                )
-                            } else if (role == "electrician") {
-                                const details = await axios.post(
-                                    "https://novicers-i-tech-ondc.vercel.app/api/electricianDetails",
-                                    {
-                                        name: username,
-                                        email,
-                                        password,
-                                        phone,
-                                        address,
-                                        age,
-                                    }
-                                )
-                            } else if (role == "plumber") {
-                                const details = await axios.post(
-                                    "https://novicers-i-tech-ondc.vercel.app/api/plumberDetails",
-                                    {
-                                        name: username,
-                                        email,
-                                        password,
-                                        phone,
-                                        address,
-                                        age,
-                                    }
-                                )
-                            }
+                            const details = await axios.post(
+                                `http://localhost:3000/api/${role}Details`,
+                                {
+                                    name: username,
+                                    email,
+                                    password,
+                                    phone,
+                                    address,
+                                    age,
+                                }
+                            )
                             setIsLoading(false)
                             setTimeout(() => {
                                 navigate.push("/")

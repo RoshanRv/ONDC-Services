@@ -27,7 +27,7 @@ const WorkerReport = ({ data }) => {
         setIsError(false)
         try {
             const resp = await axios.put(
-                `https://novicers-i-tech-ondc.vercel.app/api/${service}Details`,
+                `http://localhost:3000/api/${service}Details`,
                 { id, online: !status }
             )
             console.log(resp)
@@ -94,7 +94,7 @@ export const getServerSideProps = async ({ query }) => {
     const { id } = query
     try {
         const data = await axios.get(
-            `https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`
+            `http://localhost:3000/api/bookingDetails?id=${id}`
         )
 
         return {
