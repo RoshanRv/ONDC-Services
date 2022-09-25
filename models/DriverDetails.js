@@ -54,6 +54,14 @@ const DriverDetails = new mongoose.Schema({
         type: String,
         required: true,
     },
+    coords: {
+        lat: {
+            type: String,
+        },
+        lng: {
+            type: String,
+        },
+    },
 })
 
 module.exports =
