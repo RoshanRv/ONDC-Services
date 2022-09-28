@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { Context } from "./Context"
 import Button from "./Button"
 import { motion } from "framer-motion"
 import { useRouter } from "next/router"
@@ -9,24 +10,34 @@ import { getDistanceAndTime } from "../util/util"
 
 const Card = ({ data }) => {
     const { service } = useRouter().query
+    const { userCoords } = useContext(Context)
     const [coords, setCoords] = useState({})
     const [distTime, setDistTime] = useState({})
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(({ coords }) => {
-            setCoords({
-                lat: coords.latitude,
-                lng: coords.longitude,
-            })
-            setDistTime(
-                getDistanceAndTime(
-                    coords.latitude,
-                    data.coords.lat,
-                    coords.longitude,
-                    data.coords.lng
-                )
+        // navigator.geolocation.getCurrentPosition(({ coords }) => {
+        //     setCoords({
+        //         lat: coords.latitude,
+        //         lng: coords.longitude,
+        //     })
+        //     setDistTime(
+        //         getDistanceAndTime(
+        //             coords.latitude,
+        //             data.coords.lat,
+        //             coords.longitude,
+        //             data.coords.lng
+        //         )
+        //     )
+        // })
+
+        setDistTime(
+            getDistanceAndTime(
+                userCoords.latitude,
+                data.coords.lat,
+                userCoords.longitude,
+                data.coords.lng
             )
-        })
+        )
     }, [])
 
     return (

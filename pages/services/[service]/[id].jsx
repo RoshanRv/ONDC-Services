@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { Context } from "../../../components/Context"
 import RatingCard from "../../../components/RatingCard"
 import { motion } from "framer-motion"
 import axios from "axios"
@@ -24,21 +25,32 @@ const Worker = ({ data }) => {
     const [coords, setCoords] = useState({})
     const [distTime, setDistTime] = useState({})
 
+    const { userCoords } = useContext(Context)
+
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(({ coords }) => {
-            setCoords({
-                lat: coords.latitude,
-                lng: coords.longitude,
-            })
-            setDistTime(
-                getDistanceAndTime(
-                    coords.latitude,
-                    data.coords.lat,
-                    coords.longitude,
-                    data.coords.lng
-                )
+        // navigator.geolocation.getCurrentPosition(({ coords }) => {
+        //     setCoords({
+        //         lat: coords.latitude,
+        //         lng: coords.longitude,
+        //     })
+        //     setDistTime(
+        //         getDistanceAndTime(
+        //             coords.latitude,
+        //             data.coords.lat,
+        //             coords.longitude,
+        //             data.coords.lng
+        //         )
+        //     )
+        // })
+
+        setDistTime(
+            getDistanceAndTime(
+                userCoords.latitude,
+                data.coords.lat,
+                userCoords.longitude,
+                data.coords.lng
             )
-        })
+        )
     }, [])
 
     const handleBook = async (e) => {
@@ -55,7 +67,7 @@ const Worker = ({ data }) => {
                         age,
                         address,
                         workerId: data._id,
-                        coords,
+                        userCoords,
                     }
                 )
                 setIsError(false)
