@@ -1,9 +1,17 @@
 import Link from "next/link"
-import React from "react"
+import React, { useEffect, useContext, useState } from "react"
 import { FaUser } from "react-icons/fa"
 import { BiLogIn } from "react-icons/bi"
+import { getCurrentLocation } from "../util/util"
+import { Context } from "./Context"
 
 const Header = () => {
+    const { userCoords, setUserCoords } = useContext(Context)
+
+    useEffect(() => {
+        setUserCoords(getCurrentLocation())
+    }, [])
+
     return (
         <header className="p-1 md:p-3 lg:px-6 lg:py-3 font-rale bg-gradient-to-r from-sky-400 to-blue-600">
             <nav className="flex justify-between items-center text-white">
