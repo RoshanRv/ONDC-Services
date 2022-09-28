@@ -105,10 +105,10 @@ export const Card = ({ d, coords }) => {
     useEffect(() => {
         setDistTime(
             getDistanceAndTime(
-                coords.lat,
-                d.coords.lat,
-                coords.lng,
-                d.coords.lng
+                coords?.lat,
+                d.coords?.lat,
+                coords?.lng,
+                d.coords?.lng
             )
         )
     }, [])
