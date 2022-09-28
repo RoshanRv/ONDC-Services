@@ -1,13 +1,36 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Button from "./Button"
 import { motion } from "framer-motion"
 import { useRouter } from "next/router"
+import { FaPhoneAlt } from "react-icons/fa"
+import { RiPinDistanceLine } from "react-icons/ri"
+import { MdTimer } from "react-icons/md"
+import { getDistanceAndTime } from "../util/util"
 
 const Card = ({ data }) => {
     const { service } = useRouter().query
+    const [coords, setCoords] = useState({})
+    const [distTime, setDistTime] = useState({})
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(({ coords }) => {
+            setCoords({
+                lat: coords.latitude,
+                lng: coords.longitude,
+            })
+            setDistTime(
+                getDistanceAndTime(
+                    coords.latitude,
+                    data.coords.lat,
+                    coords.longitude,
+                    data.coords.lng
+                )
+            )
+        })
+    }, [])
 
     return (
-        <div className="w-max text-left p-3 rounded-xl border  border-black  overflow-hidden">
+        <div className="w-max text-left p-3 rounded-xl border-2  border-gray-400  overflow-hidden">
             <div className="w-60 md:w-96 h-60 md:h-80 ">
                 <img
                     src={data.img}
@@ -17,7 +40,7 @@ const Card = ({ data }) => {
             </div>
             <div className="">
                 <h1 className="text-3xl my-2 font-semibold">{data.name}</h1>
-                <h1 className="text-xl my-1">{data.phone}</h1>
+                {/*        Active/ Busy Status      */}
                 <div className="flex text-xl items-center gap-x-2 my-1">
                     <motion.div
                         className={`h-2 w-2 rounded-full ${
@@ -28,8 +51,28 @@ const Card = ({ data }) => {
                     />
                     <h1>{data.online ? "Active" : "Busy"}</h1>
                 </div>
+
+                {/*    Distance & Time */}
+
+                <div className="flex  gap-x-4 ">
+                    <div className="justify-center flex gap-x-2 items-center text-lg my-3 border border-gray-300 w-max px-3 py-1 rounded-lg bg-gray-100 ">
+                        <RiPinDistanceLine className="" />
+                        <h1>{`${distTime?.dist || "--"} km`}</h1>
+                    </div>
+
+                    <div className="justify-center flex gap-x-2 items-center text-lg my-3 border border-gray-300 w-max px-3 py-1 rounded-lg bg-gray-100 ">
+                        <MdTimer className="" />
+                        <h1>{`${distTime?.time || "--"} min`}</h1>
+                    </div>
+                </div>
+
+                {/*      Phone NO     */}
+                <div className="flex gap-x-2 items-center bg-gray-100  px-4 border py-1 border-gray-300 rounded-lg w-max">
+                    <FaPhoneAlt />
+                    <h1 className=" my-1">{data.phone}</h1>
+                </div>
             </div>
-            <div className="md:flex items-center">
+            <div className="md:flex items-center mt-6">
                 <Button link={`/services/${service}/${data._id}`}>
                     View Details
                 </Button>

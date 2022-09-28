@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import RatingCard from "../../../components/RatingCard"
 import { motion } from "framer-motion"
 import axios from "axios"
-import { FaEnvelope, FaPhone, FaLocationArrow } from "react-icons/fa"
+import { FaEnvelope, FaPhoneAlt, FaLocationArrow } from "react-icons/fa"
+import { RiPinDistanceLine } from "react-icons/ri"
+import { MdTimer } from "react-icons/md"
 import Title from "../../../components/Title"
 import ErrorTxt from "../../../components/ErrorText"
 import Spinner from "../../../components/Spinner"
 import Head from "next/head"
+import { getDistanceAndTime } from "../../../util/util"
 
 const Worker = ({ data }) => {
     const [showModel, setShowModel] = useState(false)
@@ -18,6 +21,26 @@ const Worker = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
+    const [coords, setCoords] = useState({})
+    const [distTime, setDistTime] = useState({})
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(({ coords }) => {
+            setCoords({
+                lat: coords.latitude,
+                lng: coords.longitude,
+            })
+            setDistTime(
+                getDistanceAndTime(
+                    coords.latitude,
+                    data.coords.lat,
+                    coords.longitude,
+                    data.coords.lng
+                )
+            )
+        })
+    }, [])
+
     const handleBook = async (e) => {
         if (username != "" || phone != "" || address != "") {
             e.preventDefault()
@@ -26,7 +49,14 @@ const Worker = ({ data }) => {
             try {
                 const book = await axios.post(
                     "http://localhost:3000/api/bookingDetails",
-                    { name: username, phone, age, address, workerId: data._id }
+                    {
+                        name: username,
+                        phone,
+                        age,
+                        address,
+                        workerId: data._id,
+                        coords,
+                    }
                 )
                 setIsError(false)
                 setIsLoading(false)
@@ -94,20 +124,34 @@ const Worker = ({ data }) => {
                             <h1>{data.online ? "Active" : "Busy"}</h1>
                         </div>
 
-                        <div className="md:flex gap-x-4">
-                            <div className="flex gap-x-4 items-center text-lg my-2 border border-black w-max px-6 py-2 rounded-lg bg-gray-100 ">
-                                <FaPhone />
+                        {/*    Distance & Time */}
+
+                        <div className="flex  gap-x-4 ">
+                            <div className="justify-center flex flex-col gap-y-4  gap-x-4 items-center text-lg my-2 border border-gray-300 w-max px-6 py-3 rounded-xl bg-gray-100 ">
+                                <RiPinDistanceLine className="text-5xl" />
+                                <h1>{`${distTime?.dist || "--"} km`}</h1>
+                            </div>
+
+                            <div className="justify-center flex flex-col gap-y-4  gap-x-4 items-center text-lg my-2 border border-gray-300 w-max px-6 py-3 rounded-xl bg-gray-100 ">
+                                <MdTimer className="text-5xl" />
+                                <h1>{`${distTime?.time || "--"} min`}</h1>
+                            </div>
+                        </div>
+
+                        <div className="md:flex gap-x-4 ">
+                            <div className="flex gap-x-4 items-center text-lg my-2 border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                                <FaPhoneAlt />
                                 <h1>{data.phone}</h1>
                             </div>
 
-                            <div className="flex gap-x-4 items-center text-lg my-2 border border-black w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                            <div className="flex gap-x-4 items-center text-lg my-2 border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
                                 <FaEnvelope />
                                 <h1>{data.email}</h1>
                             </div>
                         </div>
 
                         <div className="md:flex gap-x-4">
-                            <div className="flex gap-x-4 items-center text-lg my-2 border border-black w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                            <div className="flex gap-x-4 items-center text-lg my-2 border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
                                 <h1>Age</h1>
                                 <h1>{data.age}</h1>
                             </div>
@@ -217,7 +261,7 @@ export default Worker
 
 export const getServerSideProps = async ({ params }) => {
     let { service, id } = params
-    console.log(service)
+    // console.log(/service)
 
     if (service == "Vehicle" || service == "vehicle") service = "driver"
     try {
