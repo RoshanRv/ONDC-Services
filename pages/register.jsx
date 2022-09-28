@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Title from "../components/Title"
 import { motion } from "framer-motion"
 import axios from "axios"
@@ -16,6 +16,8 @@ const register = () => {
     const [address, setAddress] = useState("")
     const [age, setAge] = useState("")
 
+    const [coords, setCoords] = useState()
+
     const [file, setFile] = useState("")
     const [role, setRole] = useState("")
 
@@ -23,6 +25,16 @@ const register = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
+
+    //      get coords...
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((pos) =>
+            setCoords({
+                lat: pos.coords.latitude,
+                lng: pos.coords.longitude,
+            })
+        )
+    }, [])
 
     const navigate = useRouter()
 
@@ -64,6 +76,7 @@ const register = () => {
                                     address,
                                     age,
                                     img: url,
+                                    coords,
                                 }
                             )
                             setIsLoading(false)
@@ -86,6 +99,7 @@ const register = () => {
                                     phone,
                                     address,
                                     age,
+                                    coords,
                                 }
                             )
                             setIsLoading(false)
