@@ -15,26 +15,11 @@ const Card = ({ data }) => {
     const [distTime, setDistTime] = useState({})
 
     useEffect(() => {
-        // navigator.geolocation.getCurrentPosition(({ coords }) => {
-        //     setCoords({
-        //         lat: coords.latitude,
-        //         lng: coords.longitude,
-        //     })
-        //     setDistTime(
-        //         getDistanceAndTime(
-        //             coords.latitude,
-        //             data.coords.lat,
-        //             coords.longitude,
-        //             data.coords.lng
-        //         )
-        //     )
-        // })
-
         setDistTime(
             getDistanceAndTime(
-                userCoords.latitude,
+                userCoords.lat,
                 data.coords.lat,
-                userCoords.longitude,
+                userCoords.lng,
                 data.coords.lng
             )
         )

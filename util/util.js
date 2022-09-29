@@ -31,15 +31,3 @@ export const getDistanceAndTime = (lat1, lat2, lon1, lon2) => {
         }
     }
 }
-
-export const getCurrentLocation = () => {
-    let location = {}
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-        location = {
-            lat: coords.latitude,
-            lng: coords.longitude,
-        }
-    })
-
-    return location
-}
