@@ -22,7 +22,6 @@ const Worker = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
-    const [coords, setCoords] = useState({})
     const [distTime, setDistTime] = useState({})
 
     const { userCoords } = useContext(Context)
@@ -36,7 +35,7 @@ const Worker = ({ data }) => {
                 data.coords.lng
             )
         )
-    }, [])
+    }, [userCoords])
 
     const handleBook = async (e) => {
         if (username != "" || phone != "" || address != "") {

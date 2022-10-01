@@ -11,7 +11,6 @@ import { getDistanceAndTime } from "../util/util"
 const Card = ({ data }) => {
     const { service } = useRouter().query
     const { userCoords } = useContext(Context)
-    const [coords, setCoords] = useState({})
     const [distTime, setDistTime] = useState({})
 
     useEffect(() => {
@@ -23,7 +22,7 @@ const Card = ({ data }) => {
                 data.coords.lng
             )
         )
-    }, [])
+    }, [userCoords])
 
     return (
         <div className="w-max text-left p-3 rounded-xl border-2  border-gray-400  overflow-hidden">

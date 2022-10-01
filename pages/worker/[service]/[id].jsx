@@ -103,6 +103,7 @@ const WorkerReport = ({ data }) => {
 export const Card = ({ d, coords }) => {
     const [distTime, setDistTime] = useState({})
     useEffect(() => {
+        console.log(coords)
         setDistTime(
             getDistanceAndTime(
                 coords?.lat,
@@ -111,7 +112,7 @@ export const Card = ({ d, coords }) => {
                 d.coords?.lng
             )
         )
-    }, [])
+    }, [coords])
 
     return (
         <div className="bg-sky-300 md:p-4 p-2  border-2 rounded-lg ">

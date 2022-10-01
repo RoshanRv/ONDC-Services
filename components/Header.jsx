@@ -14,12 +14,17 @@ const Header = () => {
 
     useEffect(() => {
         getDistanceAndTime()
-        navigator.geolocation.getCurrentPosition(({ coords }) => {
-            setUserCoords({
-                lat: coords.latitude,
-                lng: coords.longitude,
-            })
-        })
+        navigator.geolocation.getCurrentPosition(() => {})
+        navigator.geolocation.getCurrentPosition(
+            ({ coords }) => {
+                setUserCoords({
+                    lat: coords.latitude,
+                    lng: coords.longitude,
+                })
+            },
+            () => {},
+            { maximumAge: 1000 }
+        )
     }, [])
 
     const handleShowDropDown = (tab) => {
@@ -51,7 +56,7 @@ const Header = () => {
                         <div
                             className={`absolute border border-gray-300 shadow-lg -bottom-full translate-y-3/4 text-black bg-white rounded-lg  flex flex-col gap-y-2 ${
                                 dropDown.tab == "user" ? "scale-100" : "scale-0"
-                            } transition-all origin-top `}
+                            } transition-all origin-top z-50 `}
                         >
                             <Link href={"/user/register"} passHref>
                                 <div className="flex hover:bg-gray-200 transition-all p-3 pb-2 items-center gap-x-4">
@@ -84,7 +89,7 @@ const Header = () => {
                                 dropDown.tab == "worker"
                                     ? "scale-100"
                                     : "scale-0"
-                            } transition-all origin-top `}
+                            } transition-all origin-top z-50`}
                         >
                             <Link href={"/worker/register"} passHref>
                                 <div className="flex hover:bg-gray-200 transition-all p-3 pb-2 items-center gap-x-4">
