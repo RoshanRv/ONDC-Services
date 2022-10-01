@@ -4,8 +4,8 @@ import { getCurrentLocation } from "../util/util"
 export const Context = createContext("")
 
 const Store = ({ children }) => {
-    const [userData, setUserData] = useState({})
-    const [userCoords, setUserCoords] = useState({})
+    const [userData, setUserData] = useState(null)
+    const [userCoords, setUserCoords] = useState(null)
 
     return (
         <Context.Provider
