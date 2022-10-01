@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react"
-import Title from "../components/Title"
+import React, { useState, useEffect, useContext } from "react"
+import Title from "../../components/Title"
 import { motion } from "framer-motion"
 import axios from "axios"
 import { useRouter } from "next/router"
 import Link from "next/link"
-import Spinner from "../components/Spinner"
-import ErrorTxt from "../components/ErrorText"
+import Spinner from "../../components/Spinner"
+import ErrorTxt from "../../components/ErrorText"
+import { Context } from "../../components/Context"
 
 const register = () => {
     const [username, setUsername] = useState("")
@@ -16,10 +17,7 @@ const register = () => {
     const [address, setAddress] = useState("")
     const [age, setAge] = useState("")
 
-    const [coords, setCoords] = useState()
-
-    const [file, setFile] = useState("")
-    const [role, setRole] = useState("")
+    const { userCoords } = useContext(Context)
 
     const [passIncorrect, setPassIncorrect] = useState(false)
 
@@ -27,14 +25,14 @@ const register = () => {
     const [isError, setIsError] = useState(false)
 
     //      get coords...
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) =>
-            setCoords({
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude,
-            })
-        )
-    }, [])
+    // useEffect(() => {
+    //     navigator.geolocation.getCurrentPosition((pos) =>
+    //         setCoords({
+    //             lat: pos.coords.latitude,
+    //             lng: pos.coords.longitude,
+    //         })
+    //     )
+    // }, [])
 
     const navigate = useRouter()
 
@@ -54,66 +52,26 @@ const register = () => {
                 setPassIncorrect(false)
                 setIsLoading(true)
                 try {
-                    if (file) {
-                        const data = new FormData()
-                        data.append("file", file[0])
-                        data.append("upload_preset", "uploads")
-
-                        try {
-                            const uploadRes = await axios.post(
-                                "https://api.cloudinary.com/v1_1/hackfest/image/upload",
-                                data
-                            )
-                            const { url } = uploadRes.data
-
-                            const details = await axios.post(
-                                `http://localhost:3000/api/d${role}Details`,
-                                {
-                                    name: username,
-                                    email,
-                                    password,
-                                    phone,
-                                    address,
-                                    age,
-                                    img: url,
-                                    coords,
-                                }
-                            )
-                            setIsLoading(false)
-                            setTimeout(() => {
-                                navigate.push("/")
-                            }, 3000)
-                        } catch (err) {
-                            console.log(err)
-                            setIsLoading(false)
-                            setIsError(true)
+                    const details = await axios.post(
+                        `http://localhost:3000/api/user`,
+                        {
+                            name: username,
+                            email,
+                            password,
+                            phone,
+                            address,
+                            age,
+                            coords: userCoords,
                         }
-                    } else {
-                        try {
-                            const details = await axios.post(
-                                `http://localhost:3000/api/${role}Details`,
-                                {
-                                    name: username,
-                                    email,
-                                    password,
-                                    phone,
-                                    address,
-                                    age,
-                                    coords,
-                                }
-                            )
-                            setIsLoading(false)
-                            setTimeout(() => {
-                                navigate.push("/")
-                            }, 3000)
-                        } catch (err) {
-                            console.log(err)
-                            setIsLoading(false)
-                            setIsError(true)
-                        }
-                    }
+                    )
+                    setIsLoading(false)
+                    setTimeout(() => {
+                        navigate.push("/users/login")
+                    }, 3000)
                 } catch (err) {
                     console.log(err)
+                    setIsLoading(false)
+                    setIsError(true)
                 }
             } else {
                 setPassIncorrect(true)
@@ -123,7 +81,7 @@ const register = () => {
 
     return (
         <main className="md:px-6 px-3">
-            <Title>Register As Worker</Title>
+            <Title>Register As User</Title>
             {/*     FORM        */}
             <div>
                 <form
@@ -187,19 +145,6 @@ const register = () => {
                             whileTap={{ scale: 0.8 }}
                         />
 
-                        <motion.select
-                            className="p-2  rounded-lg border-gray-700 outline-0 w-full block"
-                            value={role}
-                            onChange={(e) => setRole(e.target.value)}
-                            whileTap={{ scale: 0.8 }}
-                            required
-                        >
-                            <option value="">--Role--</option>
-                            <option value="driver">Driver</option>
-                            <option value="electrician">Electrician</option>
-                            <option value="plumber">Plumber</option>
-                        </motion.select>
-
                         <motion.textarea
                             rows={5}
                             required
@@ -219,19 +164,6 @@ const register = () => {
                             whileTap={{ scale: 0.8 }}
                         />
 
-                        <div className="flex gap-x-4 items-center">
-                            <label className="text-white">
-                                Profile Photo :
-                            </label>
-                            <motion.input
-                                type="file"
-                                id="file"
-                                className="inline-block"
-                                onChange={(e) => setFile(e.target.files)}
-                                whileTap={{ scale: 0.8 }}
-                            />
-                        </div>
-
                         <motion.input
                             type={"submit"}
                             className="px-6 py-2 cursor-pointer w-max font-rale font-semibold bg-white text-blue-500 rounded-lg block mx-auto my-4"
@@ -243,7 +175,7 @@ const register = () => {
                         {isLoading && <Spinner />}
                         {isError && <ErrorTxt />}
 
-                        <Link href="/worker/login" passHref>
+                        <Link href="/users/login" passHref>
                             <h1 className="text-gray-100 hover:underline hover:text-white w-max mx-auto  text-lg">
                                 Login
                             </h1>

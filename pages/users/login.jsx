@@ -13,11 +13,10 @@ const login = () => {
     const [passIncorrect, setPassIncorrect] = useState(false)
     const navigate = useRouter()
 
-    const [role, setRole] = useState("")
-    const { setUserData } = useContext(Context)
-
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
+
+    const { setUserData } = useContext(Context)
 
     const handleSubmit = async (e) => {
         setPassIncorrect(false)
@@ -30,15 +29,13 @@ const login = () => {
             try {
                 const data = await axios.post(
                     "http://localhost:3000/api/login",
-                    { email, password, role }
+                    { email, password, role: "user" }
                 )
                 if (data.data.length > 0) {
-                    const workerData = { ...data.data[0], role }
-                    localStorage.setItem("user", JSON.stringify(workerData))
-                    setUserData(workerData)
+                    localStorage.setItem("user", JSON.stringify(data.data[0]))
+                    setUserData(data.data[0])
                     setPassIncorrect(false)
                     setIsLoading(false)
-                    navigate.push(`/worker/${role}/${data.data[0]._id}`)
                 } else {
                     setIsLoading(false)
                     setPassIncorrect(true)
@@ -53,7 +50,7 @@ const login = () => {
 
     return (
         <main className="md:px-6 px-3">
-            <Title>Login As Worker</Title>
+            <Title>Login As User</Title>
             {/*     FORM        */}
             <div>
                 <form
@@ -81,19 +78,11 @@ const login = () => {
                             } rounded-lg  outline-0 w-full block`}
                             whileTap={{ scale: 0.8 }}
                         />
-
-                        <motion.select
-                            className="p-2  rounded-lg border-gray-700 outline-0 w-full block"
-                            value={role}
-                            onChange={(e) => setRole(e.target.value)}
-                            whileTap={{ scale: 0.8 }}
-                            required
-                        >
-                            <option value="">--Role--</option>
-                            <option value="driver">Driver</option>
-                            <option value="electrician">Electrician</option>
-                            <option value="plumber">Plumber</option>
-                        </motion.select>
+                        {passIncorrect && (
+                            <h1 className="text-sm text-red-600">
+                                Incorrect Password!!
+                            </h1>
+                        )}
 
                         <motion.input
                             type={"submit"}

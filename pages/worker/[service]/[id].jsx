@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
 import Title from "../../../components/Title"
@@ -8,29 +8,20 @@ import { MdTimer } from "react-icons/md"
 import Spinner from "../../../components/Spinner"
 import ErrorTxt from "../../../components/ErrorText"
 import { getDistanceAndTime } from "../../../util/util"
+import { Context } from "../../../components/Context"
 
 const WorkerReport = ({ data }) => {
-    const [user, setUser] = useState("")
+    const { userData, setUserData, userCoords, setUserCoords } =
+        useContext(Context)
     const { service, id } = useRouter().query
-    const [status, setStatus] = useState(false)
-    const [coords, setCoords] = useState({})
+    const [status, setStatus] = useState(userData.online)
 
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"))
-        if (user) {
-            setUser(user.name)
-            setStatus(user.online)
-            setCoords(user.coords)
-        }
-    }, [])
-
     const getLocation = () => {
         navigator.geolocation.getCurrentPosition(({ coords }) => {
-            console.log(coords)
-            setCoords({
+            setUserCoords({
                 lat: coords.latitude,
                 lng: coords.longitude,
             })
@@ -42,12 +33,18 @@ const WorkerReport = ({ data }) => {
         setIsError(false)
         try {
             getLocation()
-            const resp = await axios.put(
+            let resp = await axios.put(
                 `http://localhost:3000/api/${service}Details`,
-                { id, online, coords }
+                { id, online, coords: userCoords }
             )
-            console.log(resp)
-            localStorage.setItem("user", JSON.stringify(resp.data))
+            // users prev details (role) + new coords,status
+            resp = {
+                ...userData,
+                coords: resp.data.coords,
+                online: resp.data.online,
+            }
+            localStorage.setItem("user", JSON.stringify(resp))
+            setUserData(resp)
             setStatus(online)
             setIsLoading(false)
         } catch (err) {
@@ -60,7 +57,7 @@ const WorkerReport = ({ data }) => {
     return (
         <main className="px-6 lg:px-10 mb-10">
             <Title>Services Requested</Title>
-            <Title>{user == null ? "Worker" : user}</Title>
+            <Title>{userData?.name == null ? "Worker" : userData?.name}</Title>
             <div className="md:flex justify-center text-xl items-center gap-x-10 my-1 md:w-max mx-auto rounded-md border-2 p-2 border-gray-400">
                 <div className="flex items-center gap-x-2 w-max mx-auto">
                     <div
@@ -90,7 +87,7 @@ const WorkerReport = ({ data }) => {
             {data.length > 0 ? (
                 <div className="grid lg:grid-cols-3 mt-8 gap-8 grid-cols-1">
                     {data.map((d, i) => (
-                        <Card key={i} d={d} coords={coords} />
+                        <Card key={i} d={d} coords={userCoords} />
                     ))}
                 </div>
             ) : (
@@ -103,7 +100,6 @@ const WorkerReport = ({ data }) => {
 export const Card = ({ d, coords }) => {
     const [distTime, setDistTime] = useState({})
     useEffect(() => {
-        console.log(coords)
         setDistTime(
             getDistanceAndTime(
                 coords?.lat,
