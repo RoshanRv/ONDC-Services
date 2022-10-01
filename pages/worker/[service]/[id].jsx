@@ -14,10 +14,14 @@ const WorkerReport = ({ data }) => {
     const { userData, setUserData, userCoords, setUserCoords } =
         useContext(Context)
     const { service, id } = useRouter().query
-    const [status, setStatus] = useState(userData.online)
+    const [status, setStatus] = useState(userData?.online)
 
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        setStatus(userData?.online)
+    }, [])
 
     const getLocation = () => {
         navigator.geolocation.getCurrentPosition(({ coords }) => {

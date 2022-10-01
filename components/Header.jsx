@@ -1,7 +1,6 @@
 import Link from "next/link"
 import React, { useEffect, useContext, useState } from "react"
-import { FaRegistered, FaSignOutAlt, FaUser } from "react-icons/fa"
-import { BiLogIn } from "react-icons/bi"
+import { FaSignOutAlt, FaUser } from "react-icons/fa"
 import { Context } from "./Context"
 import { getDistanceAndTime } from "../util/util"
 import { FaSignInAlt, FaUserTie } from "react-icons/fa"
