@@ -24,18 +24,26 @@ const Worker = ({ data }) => {
 
     const [distTime, setDistTime] = useState({})
 
-    const { userCoords } = useContext(Context)
+    const { userCoords, userData } = useContext(Context)
 
     useEffect(() => {
         setDistTime(
             getDistanceAndTime(
-                userCoords.lat,
+                userCoords?.lat,
                 data.coords.lat,
-                userCoords.lng,
+                userCoords?.lng,
                 data.coords.lng
             )
         )
     }, [userCoords])
+
+    //  auto fill form
+    useEffect(() => {
+        setUsername(userData?.name)
+        setPhone(userData?.phone)
+        setAge(userData?.age)
+        setAddress(userData?.address)
+    }, [userData])
 
     const handleBook = async (e) => {
         if (username != "" || phone != "" || address != "") {
@@ -51,7 +59,7 @@ const Worker = ({ data }) => {
                         age,
                         address,
                         workerId: data._id,
-                        userCoords,
+                        coords: userCoords,
                     }
                 )
                 setIsError(false)

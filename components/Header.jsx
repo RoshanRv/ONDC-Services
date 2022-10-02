@@ -62,7 +62,7 @@ const Header = () => {
                             }
                             className="flex flex-col justify-center select-none items-center gap-x-4 cursor-pointer relative"
                         >
-                            <FaUser className="text-2xl mb-1" />
+                            <FaUser className="text-lg md:text-2xl mb-1" />
                             <h1>User</h1>
                             {/*   Dropdown   */}
                             <div
@@ -93,9 +93,9 @@ const Header = () => {
                                     ? () => handleHideDropDown()
                                     : () => handleShowDropDown("worker")
                             }
-                            className="flex flex-col justify-center select-none items-center gap-x-4 cursor-pointer relative"
+                            className="flex mr-3 md:mr-2 flex-col justify-center select-none items-center gap-x-4 cursor-pointer relative"
                         >
-                            <FaUserTie className="text-2xl mb-1" />
+                            <FaUserTie className=" text-lg md:text-2xl mb-1" />
                             <h1>Servicemen</h1>
                             {/*   Dropdown   */}
                             <div
@@ -127,12 +127,12 @@ const Header = () => {
                                 ? () => handleHideDropDown()
                                 : () => handleShowDropDown("logged")
                         }
-                        className="flex flex-col justify-center select-none items-center gap-x-4 cursor-pointer relative"
+                        className="mr-4 md:mr-3 flex flex-col justify-center select-none items-center gap-x-4 cursor-pointer relative"
                     >
                         {userData?.img ? (
-                            <FaUserTie className="text-2xl mb-1" />
+                            <FaUserTie className=" text-lg md:text-2xl mb-1" />
                         ) : (
-                            <FaUser className="text-2xl mb-1" />
+                            <FaUser className=" text-lg md:text-2xl mb-1" />
                         )}
                         <h1 className="capitalize">{userData.name}</h1>
                         {/*   Dropdown   */}

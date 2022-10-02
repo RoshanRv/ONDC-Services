@@ -16,9 +16,9 @@ const Card = ({ data }) => {
     useEffect(() => {
         setDistTime(
             getDistanceAndTime(
-                userCoords.lat,
+                userCoords?.lat,
                 data.coords.lat,
-                userCoords.lng,
+                userCoords?.lng,
                 data.coords.lng
             )
         )
