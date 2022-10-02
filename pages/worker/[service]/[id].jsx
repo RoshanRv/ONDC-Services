@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
 import Title from "../../../components/Title"
-import { FaUser, FaLocationArrow, FaPhone, FaEnvelope } from "react-icons/fa"
+import { FaLocationArrow, FaPhone } from "react-icons/fa"
 import { RiPinDistanceLine } from "react-icons/ri"
 import { MdTimer } from "react-icons/md"
 import Spinner from "../../../components/Spinner"
 import ErrorTxt from "../../../components/ErrorText"
 import { getDistanceAndTime } from "../../../util/util"
 import { Context } from "../../../components/Context"
+import { DriverUpdateForm } from "../../../components/WorkerUpdateForm"
+import { AnimatePresence, motion } from "framer-motion"
 
 const WorkerReport = ({ data }) => {
     const { userData, setUserData, userCoords, setUserCoords } =
@@ -18,6 +20,7 @@ const WorkerReport = ({ data }) => {
 
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [showUpdateForm, setshowUpdateForm] = useState(false)
 
     useEffect(() => {
         setStatus(userData?.online)
@@ -62,6 +65,25 @@ const WorkerReport = ({ data }) => {
         <main className="px-6 lg:px-10 mb-10">
             <Title>Services Requested</Title>
             <Title>{userData?.name == null ? "Worker" : userData?.name}</Title>
+
+            <motion.button
+                onClick={() => setshowUpdateForm(!showUpdateForm)}
+                className="px-6 py-2  w-max  font-rale bg-gradient-to-r from-sky-400 to-blue-600 text-white rounded-lg block mx-auto my-4"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.8 }}
+            >
+                Update Details
+            </motion.button>
+
+            <AnimatePresence>
+                {userData && service === "driver" && showUpdateForm && (
+                    <DriverUpdateForm
+                        userData={userData}
+                        setUserData={setUserData}
+                    />
+                )}
+            </AnimatePresence>
+
             <div className="md:flex justify-center text-xl items-center gap-x-10 my-1 md:w-max mx-auto rounded-md border-2 p-2 border-gray-400">
                 <div className="flex items-center gap-x-2 w-max mx-auto">
                     <div
@@ -72,23 +94,27 @@ const WorkerReport = ({ data }) => {
                     <h1>{status ? "Active" : "Busy"}</h1>
                 </div>
 
-                <button
+                <motion.button
                     onClick={() => handleStatusAndLocation(!status)}
                     className="px-6 py-2  w-max  font-rale bg-gradient-to-r from-sky-400 to-blue-600 text-white rounded-lg block mx-auto my-4"
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.8 }}
                 >
                     Switch Status
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                     onClick={() => handleStatusAndLocation(status)}
                     className="px-6 py-2  w-max  font-rale bg-gradient-to-r from-sky-400 to-blue-600 text-white rounded-lg block mx-auto my-4"
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.8 }}
                 >
                     Update Location
-                </button>
+                </motion.button>
                 {isLoading && <Spinner />}
                 {isError && <ErrorTxt />}
             </div>
 
-            {data.length > 0 ? (
+            {data?.length > 0 ? (
                 <div className="grid lg:grid-cols-3 mt-8 gap-8 grid-cols-1">
                     {data.map((d, i) => (
                         <Card key={i} d={d} coords={userCoords} />
