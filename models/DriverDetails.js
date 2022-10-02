@@ -14,7 +14,7 @@ const DriverDetails = new mongoose.Schema({
         type: String,
     },
     vehicleNo: {
-        type: Number,
+        type: String,
     },
 
     vehicleBrand: {
@@ -28,12 +28,6 @@ const DriverDetails = new mongoose.Schema({
     online: {
         type: Boolean,
         default: false,
-    },
-    rating: {
-        type: Number,
-    },
-    noOfRatings: {
-        type: Number,
     },
     email: {
         type: String,
@@ -61,6 +55,12 @@ const DriverDetails = new mongoose.Schema({
         lng: {
             type: String,
         },
+    },
+    seats: {
+        type: Number,
+    },
+    price: {
+        type: Number,
     },
 })
 
