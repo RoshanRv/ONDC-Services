@@ -5,8 +5,8 @@ export const getDistanceAndTime = (lat1, lat2, lon1, lon2) => {
     const speed = 20 * (5 / 18) //km/h=>m/s
     if (lat1 == lat2 && lon1 == lon2) {
         return {
-            dist: 0,
-            time: 0,
+            dist: 0.1,
+            time: 0.5,
         }
     } else {
         let radlat1 = (Math.PI * lat1) / 180
