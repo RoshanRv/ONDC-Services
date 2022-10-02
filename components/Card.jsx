@@ -3,7 +3,7 @@ import { Context } from "./Context"
 import Button from "./Button"
 import { motion } from "framer-motion"
 import { useRouter } from "next/router"
-import { FaPhoneAlt } from "react-icons/fa"
+import { FaMoneyBill, FaPhoneAlt } from "react-icons/fa"
 import { RiPinDistanceLine } from "react-icons/ri"
 import { MdTimer } from "react-icons/md"
 import { getDistanceAndTime } from "../util/util"
@@ -17,9 +17,9 @@ const Card = ({ data }) => {
         setDistTime(
             getDistanceAndTime(
                 userCoords?.lat,
-                data.coords.lat,
+                data?.coords?.lat,
                 userCoords?.lng,
-                data.coords.lng
+                data?.coords?.lng
             )
         )
     }, [userCoords])
@@ -59,6 +59,12 @@ const Card = ({ data }) => {
                         <MdTimer className="" />
                         <h1>{`${distTime?.time || "--"} min`}</h1>
                     </div>
+                </div>
+                <div className="justify-center flex gap-x-2 items-center text-lg my-3 border border-gray-300 w-max px-3 py-1 rounded-lg bg-gray-100 ">
+                    <FaMoneyBill className="" />
+                    <h1>{`${data?.price || "--"} / ${
+                        service == "vehicle" ? "km" : "hr"
+                    }`}</h1>
                 </div>
 
                 {/*      Phone NO     */}
