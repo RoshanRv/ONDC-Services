@@ -9,7 +9,10 @@ import Spinner from "../../../components/Spinner"
 import ErrorTxt from "../../../components/ErrorText"
 import { getDistanceAndTime } from "../../../util/util"
 import { Context } from "../../../components/Context"
-import { DriverUpdateForm } from "../../../components/WorkerUpdateForm"
+import {
+    DriverUpdateForm,
+    WorkerUpdateForm,
+} from "../../../components/WorkerUpdateForm"
 import { AnimatePresence, motion } from "framer-motion"
 
 const WorkerReport = ({ data }) => {
@@ -76,11 +79,20 @@ const WorkerReport = ({ data }) => {
             </motion.button>
 
             <AnimatePresence>
-                {userData && service === "driver" && showUpdateForm && (
+                {userData && service === "driver" && showUpdateForm ? (
                     <DriverUpdateForm
                         userData={userData}
                         setUserData={setUserData}
                     />
+                ) : (
+                    userData &&
+                    service !== "driver" &&
+                    showUpdateForm && (
+                        <WorkerUpdateForm
+                            userData={userData}
+                            setUserData={setUserData}
+                        />
+                    )
                 )}
             </AnimatePresence>
 
