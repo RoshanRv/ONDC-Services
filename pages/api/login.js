@@ -2,6 +2,9 @@ const dbConnect = require("../../db")
 const PlumberDetails = require("../../models/PlumberDetails")
 const ElectricianDetails = require("../../models/ElectricianDetails")
 const DriverDetails = require("../../models/DriverDetails")
+const PainterDetails = require("../../models/PainterDetails")
+const CleanerDetails = require("../../models/CleanerDetails")
+const CarpenterDetails = require("../../models/CarpenterDetails")
 const UserDetails = require("../../models/UserDetails")
 
 const handler = async (req, res) => {
@@ -14,6 +17,12 @@ const handler = async (req, res) => {
         db = PlumberDetails
     } else if (role == "electrician") {
         db = ElectricianDetails
+    } else if (role == "painter") {
+        db = PainterDetails
+    } else if (role == "cleaner") {
+        db = CleanerDetails
+    } else if (role == "carpenter") {
+        db = CarpenterDetails
     } else if (role == "user") {
         db = UserDetails
     }
