@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Title from "../../components/Title"
 import { motion } from "framer-motion"
 import axios from "axios"
@@ -6,6 +6,7 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import Spinner from "../../components/Spinner"
 import ErrorTxt from "../../components/ErrorText"
+import { Context } from "../../components/Context"
 
 const register = () => {
     const [username, setUsername] = useState("")
@@ -16,7 +17,7 @@ const register = () => {
     const [address, setAddress] = useState("")
     const [age, setAge] = useState("")
 
-    const [coords, setCoords] = useState()
+    const { userCoords } = useContext(Context)
 
     const [file, setFile] = useState("")
     const [role, setRole] = useState("")
@@ -27,14 +28,14 @@ const register = () => {
     const [isError, setIsError] = useState(false)
 
     //      get coords...
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) =>
-            setCoords({
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude,
-            })
-        )
-    }, [])
+    // useEffect(() => {
+    //     navigator.geolocation.getCurrentPosition((pos) =>
+    //         setCoords({
+    //             lat: pos.coords.latitude,
+    //             lng: pos.coords.longitude,
+    //         })
+    //     )
+    // }, [])
 
     const navigate = useRouter()
 
@@ -76,7 +77,7 @@ const register = () => {
                                     address,
                                     age,
                                     img: url,
-                                    coords,
+                                    coords: userCoords,
                                 }
                             )
                             setIsLoading(false)
@@ -99,7 +100,7 @@ const register = () => {
                                     phone,
                                     address,
                                     age,
-                                    coords,
+                                    coords: userCoords,
                                 }
                             )
                             setIsLoading(false)
@@ -198,6 +199,9 @@ const register = () => {
                             <option value="driver">Driver</option>
                             <option value="electrician">Electrician</option>
                             <option value="plumber">Plumber</option>
+                            <option value="painter">Painter</option>
+                            <option value="carpenter">Carpenter</option>
+                            <option value="cleaner">Cleaner</option>
                         </motion.select>
 
                         <motion.textarea

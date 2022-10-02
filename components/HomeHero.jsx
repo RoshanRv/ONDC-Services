@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import { motion } from "framer-motion"
 import Button from "./Button"
@@ -22,20 +22,48 @@ const bannerData = [
         img: "plumber-banner",
         link: "/services/plumber",
     },
+    {
+        title: "Painting Services",
+        desc: "Painters At Your Door-Step At Lowest Cost!!!",
+        img: "painter-banner",
+        link: "/services/painter",
+    },
+    {
+        title: "Cleaning Services",
+        desc: "Cleaners At Your Door-Step At Lowest Cost!!!",
+        img: "cleaner-banner",
+        link: "/services/cleaner",
+    },
+    {
+        title: "Carpenting Services",
+        desc: "Carpenters At Your Door-Step At Lowest Cost!!!",
+        img: "carpenter-banner",
+        link: "/services/carpenter",
+    },
 ]
 
 const HomeHero = () => {
     const [slideIndex, setSlideIndex] = useState(0)
 
     const handleNext = () => {
-        if (slideIndex >= 2) return setSlideIndex(0)
-        return setSlideIndex((e) => e + 1)
+        setSlideIndex((pre) => {
+            if (pre >= bannerData.length - 1) return 0
+            return pre + 1
+        })
     }
 
     const handlePrevious = () => {
-        if (slideIndex <= 0) return setSlideIndex(2)
+        if (slideIndex <= 0) return setSlideIndex(bannerData.length - 1)
         return setSlideIndex((e) => e - 1)
     }
+
+    useEffect(() => {
+        const autoSlider = setInterval(() => {
+            handleNext()
+        }, 5000)
+
+        return () => clearInterval(autoSlider)
+    }, [])
 
     return (
         <section className="w-full h-full relative font-rale">
@@ -51,8 +79,6 @@ const HomeHero = () => {
                         >
                             <div>
                                 <motion.img
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
                                     key={i}
                                     src={`/img/${data.img}.png`}
                                     className="w-full h-full lg:object-fill object-center object-cover"
@@ -61,8 +87,6 @@ const HomeHero = () => {
 
                             <motion.div
                                 className="flex flex-col gap-y-8 p-4"
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
                                 key={i}
                             >
                                 <h1 className=" text-2xl md:text-5xl">

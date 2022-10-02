@@ -93,6 +93,9 @@ const login = () => {
                             <option value="driver">Driver</option>
                             <option value="electrician">Electrician</option>
                             <option value="plumber">Plumber</option>
+                            <option value="painter">Painter</option>
+                            <option value="carpenter">Carpenter</option>
+                            <option value="cleaner">Cleaner</option>
                         </motion.select>
 
                         <motion.input

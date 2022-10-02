@@ -18,6 +18,21 @@ const serviceDetails = [
         img: "/img/plumber.jpeg",
         url: "/services/plumber",
     },
+    {
+        service: "Carpenter Services",
+        img: "/img/carpenter.jpeg",
+        url: "/services/carpenter",
+    },
+    {
+        service: "Painting Services",
+        img: "/img/painter.jpeg",
+        url: "/services/painter",
+    },
+    {
+        service: "Cleaning Services",
+        img: "/img/cleaner.jpeg",
+        url: "/services/cleaner",
+    },
 ]
 
 const ServiceCard = ({ service, img, url }) => {
