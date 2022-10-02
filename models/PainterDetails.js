@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const ElectricianDetails = new mongoose.Schema({
+const PainterDetails = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -28,7 +28,7 @@ const ElectricianDetails = new mongoose.Schema({
     },
     img: {
         type: String,
-        default: "/img/electrician.png",
+        default: "/img/painter.png",
     },
     address: {
         type: String,
@@ -48,5 +48,5 @@ const ElectricianDetails = new mongoose.Schema({
 })
 
 module.exports =
-    mongoose.models.ElectricianDetails ||
-    mongoose.model("ElectricianDetails", ElectricianDetails)
+    mongoose.models.PainterDetails ||
+    mongoose.model("PainterDetails", PainterDetails)

@@ -15,12 +15,6 @@ const PlumberDetails = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    rating: {
-        type: Number,
-    },
-    noOfRatings: {
-        type: Number,
-    },
     email: {
         type: String,
         required: true,
@@ -47,6 +41,9 @@ const PlumberDetails = new mongoose.Schema({
         lng: {
             type: String,
         },
+    },
+    price: {
+        type: Number,
     },
 })
 
