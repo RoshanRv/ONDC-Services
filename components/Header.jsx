@@ -2,19 +2,16 @@ import Link from "next/link"
 import React, { useEffect, useContext, useState } from "react"
 import { FaSignOutAlt, FaUser } from "react-icons/fa"
 import { Context } from "./Context"
-import { getDistanceAndTime } from "../util/util"
 import { FaSignInAlt, FaUserTie } from "react-icons/fa"
 import { BiReceipt } from "react-icons/bi"
 import { ImProfile } from "react-icons/im"
 
 const Header = () => {
-    const { userCoords, setUserCoords, userData, setUserData } =
-        useContext(Context)
+    const { setUserCoords, userData, setUserData } = useContext(Context)
     const [dropDown, setDropDown] = useState({ tab: null, show: false })
 
     useEffect(() => {
         //      set Store Coords
-        getDistanceAndTime()
         navigator.geolocation.getCurrentPosition(() => {})
         navigator.geolocation.getCurrentPosition(
             ({ coords }) => {
