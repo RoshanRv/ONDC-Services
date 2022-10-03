@@ -5,13 +5,14 @@ import { motion } from "framer-motion"
 import { useRouter } from "next/router"
 import { FaMoneyBill, FaPhoneAlt } from "react-icons/fa"
 import { RiPinDistanceLine } from "react-icons/ri"
-import { MdTimer } from "react-icons/md"
+import { MdTimer, MdEventSeat } from "react-icons/md"
 import { getDistanceAndTime } from "../util/util"
 
-const Card = ({ data }) => {
+const Card = ({ data, filterTime }) => {
     const { service } = useRouter().query
     const { userCoords } = useContext(Context)
     const [distTime, setDistTime] = useState({})
+    const [showCard, setShowCard] = useState(true)
 
     useEffect(() => {
         setDistTime(
@@ -24,8 +25,17 @@ const Card = ({ data }) => {
         )
     }, [userCoords])
 
+    useEffect(() => {
+        if (distTime.time > filterTime) setShowCard(false)
+        else setShowCard(true)
+    }, [distTime, filterTime])
+
     return (
-        <div className="w-max text-left p-3 rounded-xl border-2  border-gray-400  overflow-hidden">
+        <div
+            className={` ${
+                showCard ? "block" : "hidden"
+            } w-max text-left p-3 rounded-xl border-2  border-gray-400  overflow-hidden`}
+        >
             <div className="w-60 md:w-96 h-60 md:h-80 ">
                 <img
                     src={data.img}
@@ -60,11 +70,20 @@ const Card = ({ data }) => {
                         <h1>{`${distTime?.time || "--"} min`}</h1>
                     </div>
                 </div>
-                <div className="justify-center flex gap-x-2 items-center text-lg my-3 border border-gray-300 w-max px-3 py-1 rounded-lg bg-gray-100 ">
-                    <FaMoneyBill className="" />
-                    <h1>{`${data?.price || "--"} / ${
-                        service == "vehicle" ? "km" : "hr"
-                    }`}</h1>
+                <div className="flex  gap-x-4 ">
+                    <div className="justify-center flex gap-x-2 items-center text-lg my-3 border border-gray-300 w-max px-3 py-1 rounded-lg bg-gray-100 ">
+                        <FaMoneyBill className="" />
+                        <h1>{`${data?.price || "--"} / ${
+                            service == "vehicle" ? "km" : "hr"
+                        }`}</h1>
+                    </div>
+                    {/*         seat     */}
+                    {service == "vehicle" && (
+                        <div className="justify-center flex gap-x-2 items-center text-lg my-3 border border-gray-300 w-max px-3 py-1 rounded-lg bg-gray-100 ">
+                            <MdEventSeat className="" />
+                            <h1>{`${data?.seats || "--"}`}</h1>
+                        </div>
+                    )}
                 </div>
 
                 {/*      Phone NO     */}

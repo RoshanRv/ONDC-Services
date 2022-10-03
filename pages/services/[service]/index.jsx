@@ -9,6 +9,7 @@ import Search from "../../../components/Search"
 const Service = ({ details }) => {
     const [workerDetails, setWorkerDetails] = useState(details)
     const { service } = useRouter().query
+    const [filterTime, setFilterTime] = useState(100000000)
 
     const searchWorker = (search, filter) => {
         if (filter == "") {
@@ -31,9 +32,25 @@ const Service = ({ details }) => {
         }
     }
 
-    // const sortWorker = (sort) => {
-    //     workerDetails.sort((a[sort], b[sort]))
-    // }
+    const sortWorker = (sort) => {
+        const data = [...workerDetails]
+        if (sort == "_id" || sort == "name") {
+            data.sort((a, b) => {
+                let x = a[sort].toLowerCase()
+                let y = b[sort].toLowerCase()
+                if (x < y) {
+                    return -1
+                }
+                if (x > y) {
+                    return 1
+                }
+                return 0
+            })
+        } else {
+            data.sort((a, b) => a[sort] - b[sort])
+        }
+        setWorkerDetails(data)
+    }
 
     return (
         <>
@@ -47,10 +64,18 @@ const Service = ({ details }) => {
             </Head>
             <main className="text-center mb-10">
                 <Title>{`${service} Services`}</Title>
-                <Search searchWorker={searchWorker} />
+                <Search
+                    searchWorker={searchWorker}
+                    sortWorker={sortWorker}
+                    setFilterTime={setFilterTime}
+                />
                 <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 grid-cols-1 w-max mx-auto">
-                    {workerDetails.map((data, i) => (
-                        <Card key={i} data={data} />
+                    {workerDetails.map((data) => (
+                        <Card
+                            key={data._id}
+                            data={data}
+                            filterTime={filterTime}
+                        />
                     ))}
                 </section>
             </main>
