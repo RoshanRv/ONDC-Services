@@ -3,9 +3,12 @@ import { Context } from "../../../components/Context"
 import RatingCard from "../../../components/RatingCard"
 import { AnimatePresence, motion } from "framer-motion"
 import axios from "axios"
-import { FaEnvelope, FaPhoneAlt, FaMoneyBill } from "react-icons/fa"
-import { RiPinDistanceLine } from "react-icons/ri"
+import { FaEnvelope, FaPhoneAlt, FaMoneyBill, FaCarSide } from "react-icons/fa"
+import { RiPinDistanceLine, RiMotorbikeFill } from "react-icons/ri"
+import { IoIosArrowDown } from "react-icons/io"
 import { MdTimer } from "react-icons/md"
+import { MdEventSeat } from "react-icons/md"
+import { AiOutlineIdcard } from "react-icons/ai"
 import Title from "../../../components/Title"
 import ErrorTxt from "../../../components/ErrorText"
 import Spinner from "../../../components/Spinner"
@@ -15,6 +18,7 @@ import { useRouter } from "next/router"
 
 const Worker = ({ data }) => {
     const [showModel, setShowModel] = useState(false)
+    const [showMoreDetails, setShowMoreDetails] = useState(false)
     const [username, setUsername] = useState("")
     const [phone, setPhone] = useState("")
     const [age, setAge] = useState("")
@@ -178,6 +182,90 @@ const Worker = ({ data }) => {
                             aspernatur, voluptatum enim natus. Ducimus
                             reiciendis asperiores culpa nesciunt voluptas?
                         </h1>
+
+                        {/*          More Details for Vehicle       */}
+                        {service == "vehicle" && (
+                            <>
+                                <div className="text-center border-b-2 border-gray-300 w-full">
+                                    <motion.div
+                                        layout
+                                        initial={{ height: 0 }}
+                                        animate={{
+                                            height: showMoreDetails
+                                                ? "max-content"
+                                                : 0,
+                                        }}
+                                        className="overflow-hidden"
+                                    >
+                                        <h1 className="text-blue-500 text-2xl my-4 font-bold font-rale ">
+                                            More Details
+                                        </h1>
+                                        <div className="inline-grid md:grid-cols-2 lg:grid-cols-3 justify-items-center grid-cols-1 w-max mx-auto gap-4 mb-4">
+                                            <div className="flex gap-x-4 items-center text-lg  border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                                                <div className="flex items-center gap-x-2">
+                                                    <p>Vehicle Type</p>:
+                                                </div>
+                                                {data.vehicleType == "car" ? (
+                                                    <FaCarSide className="text-3xl" />
+                                                ) : data.vehicleType ==
+                                                  "bike" ? (
+                                                    <RiMotorbikeFill className="text-3xl" />
+                                                ) : (
+                                                    <p>--</p>
+                                                )}
+                                            </div>
+
+                                            <div className="flex gap-x-4 items-center text-lg  border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                                                <div className="flex items-center gap-x-2">
+                                                    <p>Seats</p>
+                                                    <MdEventSeat />:
+                                                </div>
+                                                <h1>{data.seats || "--"}</h1>
+                                            </div>
+
+                                            <div className="flex gap-x-4 items-center text-lg  border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                                                <div className="flex items-center gap-x-2">
+                                                    <p>License No</p>
+                                                    <AiOutlineIdcard />:
+                                                </div>
+                                                <h1>
+                                                    {data.licenseNo || "--"}
+                                                </h1>
+                                            </div>
+
+                                            <div className="flex gap-x-4 items-center text-lg  border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                                                <div className="flex items-center gap-x-2">
+                                                    <p>Brand</p>:
+                                                </div>
+                                                <h1>
+                                                    {data.vehicleBrand || "--"}
+                                                </h1>
+                                            </div>
+
+                                            <div className="flex gap-x-4 items-center text-lg  border border-gray-300 w-max px-6 py-2 rounded-lg bg-gray-100 ">
+                                                <div className="flex items-center gap-x-2">
+                                                    <p>Vehicle No</p>:
+                                                </div>
+                                                <h1>
+                                                    {data.vehicleNo || "--"}
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </div>
+                                {/*          arrow v    */}
+                                <IoIosArrowDown
+                                    onClick={() =>
+                                        setShowMoreDetails((e) => !e)
+                                    }
+                                    className={`w-max mx-auto text-xl cursor-pointer text-gray-500 ${
+                                        showMoreDetails
+                                            ? "-rotate-180"
+                                            : "rotate-0"
+                                    } transition-all `}
+                                />
+                            </>
+                        )}
 
                         <div className="flex gap-x-2 items-center text-xl text-white">
                             <motion.button
