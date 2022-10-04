@@ -262,14 +262,17 @@ export const DriverUpdateForm = ({ userData, setUserData }) => {
                         Vehicle Brand
                     </label>
                 </div>
+
                 <div className="relative w-full">
-                    <input
-                        type={"text"}
-                        className="w-full p-1 border-b-2 focus:border-blue-700 border-gray-200 text-lg outline-0 peer placeholder:text-transparent bg-transparent"
-                        placeholder="vehicleType"
+                    <select
                         value={vehicleType}
                         onChange={(e) => setVehicleType(e.target.value)}
-                    />
+                        className="bg-transparent w-full outline-0 g-1 border-b-2 focus:border-blue-700 border-gray-200 text-lg peer my-1"
+                    >
+                        <option value="">---</option>
+                        <option value="bike">Bike</option>
+                        <option value="car">Car</option>
+                    </select>
                     <label className="text-gray-200 text-sm absolute left-1 transition-all -top-5 peer-placeholder-shown:top-0 peer-focus:text-blue-700 peer-placeholder-shown:text-lg select-none pointer-events-none peer-focus:-top-5 peer-focus:text-sm">
                         Vehicle Type
                     </label>
