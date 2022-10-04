@@ -51,7 +51,7 @@ const handler = async (req, res) => {
         }
     } else if (method == "DELETE") {
         try {
-            const { id } = req.body
+            const { id } = query
             const detail = await CleanerDetails.findByIdAndDelete(id)
             res.status(201).json(detail)
         } catch (err) {
