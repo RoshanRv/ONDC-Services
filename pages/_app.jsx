@@ -7,6 +7,7 @@ import { Context } from "../components/Context"
 import { useContext } from "react"
 import { useRouter } from "next/router"
 import Spinner from "../components/Spinner"
+import Head from "next/head"
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter()
@@ -32,9 +33,14 @@ function MyApp({ Component, pageProps }) {
         <>
             <Store>
                 {loading ? (
-                    <div className="w-full h-screen bg-sky-300 flex justify-center items-center">
-                        <Spinner />
-                    </div>
+                    <>
+                        <Head>
+                            <title>Loading...</title>
+                        </Head>
+                        <div className="w-full h-screen bg-sky-300 flex justify-center items-center">
+                            <Spinner />
+                        </div>
+                    </>
                 ) : (
                     <>
                         <Header />
