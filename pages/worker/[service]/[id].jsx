@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
 import Title from "../../../components/Title"
-import { FaLocationArrow, FaPhone } from "react-icons/fa"
+import { FaLocationArrow, FaPhone, FaTrashAlt } from "react-icons/fa"
 import { RiPinDistanceLine } from "react-icons/ri"
 import { MdTimer } from "react-icons/md"
 import Spinner from "../../../components/Spinner"
@@ -18,6 +18,9 @@ import { AnimatePresence, motion } from "framer-motion"
 const WorkerReport = ({ data }) => {
     const { userData, setUserData, userCoords, setUserCoords } =
         useContext(Context)
+
+    const [workerRequests, setWorkerRequests] = useState(data)
+
     const { service, id } = useRouter().query
     const [status, setStatus] = useState(userData?.online)
 
@@ -60,6 +63,20 @@ const WorkerReport = ({ data }) => {
         } catch (err) {
             setIsError(true)
             setIsLoading(false)
+            console.log(err)
+        }
+    }
+
+    const handleDeleteRequests = async (id) => {
+        try {
+            const resp = await axios.delete(
+                `http://localhost:3000/api/bookingDetails?id=${id}`
+            )
+            console.log(resp.data)
+            setWorkerRequests((prev) =>
+                prev.filter((req) => req._id != resp.data._id)
+            )
+        } catch (err) {
             console.log(err)
         }
     }
@@ -126,10 +143,15 @@ const WorkerReport = ({ data }) => {
                 {isError && <ErrorTxt />}
             </div>
 
-            {data?.length > 0 ? (
+            {workerRequests?.length > 0 ? (
                 <div className="grid lg:grid-cols-3 mt-8 gap-8 grid-cols-1">
-                    {data.map((d, i) => (
-                        <Card key={i} d={d} coords={userCoords} />
+                    {workerRequests.map((d, i) => (
+                        <Card
+                            key={i}
+                            d={d}
+                            coords={userCoords}
+                            handleDeleteRequests={handleDeleteRequests}
+                        />
                     ))}
                 </div>
             ) : (
@@ -139,7 +161,7 @@ const WorkerReport = ({ data }) => {
     )
 }
 
-export const Card = ({ d, coords }) => {
+export const Card = ({ d, coords, handleDeleteRequests }) => {
     const [distTime, setDistTime] = useState({})
     useEffect(() => {
         setDistTime(
@@ -154,9 +176,15 @@ export const Card = ({ d, coords }) => {
 
     return (
         <div className="bg-sky-300 md:p-4 p-2  border-2 rounded-lg ">
-            <h1 className="text-black text-3xl font-semibold capitalize">
-                {d.name}
-            </h1>
+            <div className="flex items-center justify-between">
+                <h1 className="text-black text-3xl font-semibold capitalize">
+                    {d.name}
+                </h1>
+                <FaTrashAlt
+                    className="text-red-500 mr-2"
+                    onClick={() => handleDeleteRequests(d._id)}
+                />
+            </div>
             <div className="flex gap-x-4 mx-auto items-center text-lg my-2 border border-gray-300  px-6 py-2 rounded-lg bg-white ">
                 <FaPhone />
                 <h1>{d.phone}</h1>
