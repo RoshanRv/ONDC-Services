@@ -5,6 +5,11 @@ const RatingSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "UserDetails",
+    },
     rating: {
         type: Number,
     },

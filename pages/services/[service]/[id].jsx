@@ -80,6 +80,31 @@ const Worker = ({ data }) => {
         }
     }
 
+    const handleRate = async () => {
+        try {
+            const rate = await axios.post(`http://localhost:3000/api/rate`, {
+                workerId: data._id,
+                userId: userData._id,
+                rating: 5,
+                review: "asjdnaknas",
+            })
+            console.log(rate)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleGetRating = async () => {
+        try {
+            const rate = await axios.get(
+                `http://localhost:3000/api/rate?id=${data._id}`
+            )
+            console.log(rate)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <>
             <Head>
@@ -280,6 +305,11 @@ const Worker = ({ data }) => {
                     </div>
                 </section>
                 <Title>Ratings & Reviews</Title>
+
+                <button onClick={handleRate}>Rate</button>
+
+                <button onClick={handleGetRating}>get Rating</button>
+
                 <div className="md:w-96 w-60 h-40 bg-gradient-to-t from-black to-black/60 mx-auto text-xl flex items-center font-semibold text-white">
                     <h1 className="w-max mx-auto">Under Construction...</h1>
                 </div>
