@@ -42,6 +42,10 @@ const ElectricianDetails = new mongoose.Schema({
             type: String,
         },
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
     price: {
         type: Number,
     },

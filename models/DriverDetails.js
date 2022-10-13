@@ -20,6 +20,10 @@ const DriverDetails = new mongoose.Schema({
     vehicleBrand: {
         type: String,
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
 
     licenseNo: {
         type: String,

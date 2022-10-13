@@ -34,6 +34,10 @@ const CarpenterDetails = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
     coords: {
         lat: {
             type: String,

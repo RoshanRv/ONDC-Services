@@ -26,6 +26,10 @@ const PlumberDetails = new mongoose.Schema({
     age: {
         type: Number,
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
     img: {
         type: String,
         default: "/img/plumber.png",
