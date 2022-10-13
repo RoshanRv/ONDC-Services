@@ -24,7 +24,7 @@ const handler = async (req, res) => {
         }
     } else if (method == "GET") {
         try {
-            const details = await ElectricianDetails.find()
+            const details = await ElectricianDetails.find({ isVerified: true })
             console.log(details)
             res.status(200).json(details)
         } catch (err) {
