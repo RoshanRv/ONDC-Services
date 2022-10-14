@@ -24,8 +24,10 @@ const handler = async (req, res) => {
     if (method == "POST") {
         try {
             const ratings = await Rating.create(req.body)
-            res.status(201).json(ratings)
+            const rate = await Rating.findById(ratings._id).populate("userId")
+            res.status(201).json(rate)
         } catch (err) {
+            console.log(err)
             res.status(500).json(err)
         }
     }
