@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useContext } from "react"
+import { Context } from "../../components/Context"
 import axios from "axios"
 import Title from "../../components/Title"
 import { useRouter } from "next/router"
@@ -17,19 +18,23 @@ import ErrorTxt from "../../components/ErrorText"
 const WorkerVerification = ({ data }) => {
     const { service } = useRouter().query
     const [workerDetails, setWorkerDetails] = useState(data)
+    const { userData } = useContext(Context)
+    const navigate = useRouter()
+
+    useEffect(() => {
+        if (userData?.name != "admin") navigate.push("/admin/login")
+    }, [])
 
     return (
         <main className="md:px-10 px-4">
             <Title>{service + " Verification"}</Title>
             <div className="grid grid-cols-1 lg:grid-cols-2">
                 {workerDetails?.map((detail, i) => (
-                    <>
-                        <VerificationCard
-                            key={i}
-                            detail={detail}
-                            setWorkerDetails={setWorkerDetails}
-                        />
-                    </>
+                    <VerificationCard
+                        key={i}
+                        detail={detail}
+                        setWorkerDetails={setWorkerDetails}
+                    />
                 ))}
             </div>
         </main>
