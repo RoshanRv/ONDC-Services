@@ -33,6 +33,13 @@ const login = () => {
                         name: "admin",
                         email: "admin@gmail.com",
                     })
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify({
+                            name: "admin",
+                            email: "admin@gmail.com",
+                        })
+                    )
                     navigate.push("/admin")
                 } else {
                     setIsLoading(false)
