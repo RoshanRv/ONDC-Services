@@ -51,7 +51,7 @@ const VerificationCard = ({ detail, setWorkerDetails }) => {
         setIsError(false)
         try {
             const data = await axios.put(
-                `http://localhost:3000/api/verification?role=${service}`,
+                `https://novicers-i-tech-ondc.vercel.app/api/verification?role=${service}`,
                 { id: detail._id, isVerified: true }
             )
             setIsLoading(false)
@@ -70,7 +70,7 @@ const VerificationCard = ({ detail, setWorkerDetails }) => {
         setIsError(false)
         try {
             const data = await axios.delete(
-                `http://localhost:3000/api/verification?id=${detail._id}&role=${service}`
+                `https://novicers-i-tech-ondc.vercel.app/api/verification?id=${detail._id}&role=${service}`
             )
             setIsLoading(false)
             setWorkerDetails((prev) =>
@@ -159,7 +159,7 @@ export const getServerSideProps = async ({ query }) => {
 
     try {
         const data = await axios.get(
-            `http://localhost:3000/api/verification?role=${service}`
+            `https://novicers-i-tech-ondc.vercel.app/api/verification?role=${service}`
         )
         return {
             props: {

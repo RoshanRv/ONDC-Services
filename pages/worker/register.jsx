@@ -68,7 +68,7 @@ const register = () => {
                             const { url } = uploadRes.data
 
                             const details = await axios.post(
-                                `http://localhost:3000/api/d${role}Details`,
+                                `https://novicers-i-tech-ondc.vercel.app/api/d${role}Details`,
                                 {
                                     name: username,
                                     email,
@@ -92,7 +92,7 @@ const register = () => {
                     } else {
                         try {
                             const details = await axios.post(
-                                `http://localhost:3000/api/${role}Details`,
+                                `https://novicers-i-tech-ondc.vercel.app/api/${role}Details`,
                                 {
                                     name: username,
                                     email,

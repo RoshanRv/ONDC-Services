@@ -47,7 +47,7 @@ const WorkerReport = ({ data }) => {
         try {
             getLocation()
             let resp = await axios.put(
-                `http://localhost:3000/api/${service}Details`,
+                `https://novicers-i-tech-ondc.vercel.app/api/${service}Details`,
                 { id, online, coords: userCoords }
             )
             // users prev details (role) + new coords,status
@@ -70,7 +70,7 @@ const WorkerReport = ({ data }) => {
     const handleDeleteRequests = async (id) => {
         try {
             const resp = await axios.delete(
-                `http://localhost:3000/api/bookingDetails?id=${id}`
+                `https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`
             )
             console.log(resp.data)
             setWorkerRequests((prev) =>
@@ -220,7 +220,7 @@ export const getServerSideProps = async ({ query }) => {
     const { id } = query
     try {
         const data = await axios.get(
-            `http://localhost:3000/api/bookingDetails?id=${id}`
+            `https://novicers-i-tech-ondc.vercel.app/api/bookingDetails?id=${id}`
         )
 
         return {

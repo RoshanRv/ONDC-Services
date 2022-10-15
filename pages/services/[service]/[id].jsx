@@ -62,7 +62,7 @@ const Worker = ({ data }) => {
             setIsLoading(true)
             try {
                 const book = await axios.post(
-                    "http://localhost:3000/api/bookingDetails",
+                    "https://novicers-i-tech-ondc.vercel.app/api/bookingDetails",
                     {
                         name: username,
                         phone,
@@ -86,7 +86,7 @@ const Worker = ({ data }) => {
     const handleGetRating = async () => {
         try {
             const rate = await axios.get(
-                `http://localhost:3000/api/rate?id=${data._id}`
+                `https://novicers-i-tech-ondc.vercel.app/api/rate?id=${data._id}`
             )
             console.log(rate)
             setUsersRating(rate.data)
@@ -401,7 +401,7 @@ export const getServerSideProps = async ({ params }) => {
     if (service == "Vehicle" || service == "vehicle") service = "driver"
     try {
         const detail = await axios.get(
-            `http://localhost:3000/api/${service}Details?id=${id}`
+            `https://novicers-i-tech-ondc.vercel.app/api/${service}Details?id=${id}`
         )
         console.log(detail.data.name)
         return {

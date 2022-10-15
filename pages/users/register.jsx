@@ -53,7 +53,7 @@ const register = () => {
                 setIsLoading(true)
                 try {
                     const details = await axios.post(
-                        `http://localhost:3000/api/user`,
+                        `https://novicers-i-tech-ondc.vercel.app/api/user`,
                         {
                             name: username,
                             email,

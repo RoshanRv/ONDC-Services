@@ -90,7 +90,7 @@ export const getServerSideProps = async ({ query }) => {
         let { service } = query
         if (service == "Vehicle" || service == "vehicle") service = "driver"
         const details = await axios.get(
-            `http://localhost:3000/api/${service}Details`
+            `https://novicers-i-tech-ondc.vercel.app/api/${service}Details`
         )
 
         return {

@@ -29,7 +29,7 @@ const login = () => {
 
             try {
                 const data = await axios.post(
-                    "http://localhost:3000/api/login",
+                    "https://novicers-i-tech-ondc.vercel.app/api/login",
                     { email, password, role }
                 )
                 if (data.data.length > 0) {
